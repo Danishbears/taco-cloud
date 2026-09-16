@@ -1,10 +1,12 @@
 package com.example.taco_cloud.JSM;
 
 import com.example.taco_cloud.data.TacoOrder;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
+@Profile("jms")
 public class JmsOrderMessagingService implements OrderMessagingService {
 
     private final JmsTemplate jms;
