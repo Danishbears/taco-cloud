@@ -1,0 +1,633 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #173b4d;
+    background: #fff;
+}
+
+
+/* ================= HEADER ================= */
+
+.header {
+    height: 80px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 7%;
+
+    border-bottom: 1px solid #edf2f4;
+
+    background: white;
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo img {
+    width: 120px;
+}
+
+.navigation {
+    display: flex;
+    gap: 35px;
+
+    margin-left: 60px;
+}
+
+.navigation a {
+    color: #173b4d;
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: 0.2s;
+}
+
+.navigation a:hover {
+    color: #e99b32;
+}
+
+.header-buttons {
+    margin-left: auto;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.login-button {
+    color: #173b4d;
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+.header-create {
+    background: #e99b32;
+
+    color: white;
+
+    text-decoration: none;
+
+    padding: 12px 22px;
+
+    border-radius: 25px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition: 0.2s;
+}
+
+.header-create:hover {
+    transform: translateY(-2px);
+}
+
+
+/* ================= HERO ================= */
+
+.hero {
+    min-height: 650px;
+
+    padding: 80px 7%;
+
+    display: flex;
+    align-items: center;
+    gap: 70px;
+
+    background:
+        radial-gradient(circle at 80% 30%, #edf8fc, transparent 40%),
+        #f8fbfc;
+}
+
+.hero-content {
+    width: 50%;
+}
+
+.hero-label {
+    color: #e99b32;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+.hero h1 {
+    margin-top: 20px;
+
+    font-size: clamp(50px, 5vw, 78px);
+
+    line-height: 1.05;
+
+    color: #123b50;
+}
+
+.hero h1 span {
+    display: block;
+    color: #e99b32;
+}
+
+.hero p {
+    margin-top: 25px;
+
+    max-width: 520px;
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    color: #637b86;
+}
+
+.hero-buttons {
+    margin-top: 35px;
+
+    display: flex;
+    gap: 15px;
+}
+
+.primary-button {
+    display: inline-block;
+
+    padding: 16px 28px;
+
+    background: #e99b32;
+
+    color: white;
+
+    border-radius: 30px;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    transition: 0.25s;
+}
+
+.primary-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 10px 25px rgba(233, 155, 50, 0.25);
+}
+
+.secondary-button {
+    display: inline-block;
+
+    padding: 16px 28px;
+
+    border: 2px solid #dce7eb;
+
+    color: #173b4d;
+
+    border-radius: 30px;
+
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+.hero-image {
+    width: 50%;
+
+    position: relative;
+}
+
+.hero-image > img {
+    width: 100%;
+
+    height: 460px;
+
+    object-fit: cover;
+
+    border-radius: 35px;
+
+    box-shadow: 0 25px 60px rgba(30, 70, 85, 0.15);
+}
+
+.floating-card {
+    position: absolute;
+
+    left: -30px;
+    bottom: 30px;
+
+    background: white;
+
+    padding: 18px 25px;
+
+    border-radius: 18px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    box-shadow: 0 15px 40px rgba(30, 70, 85, 0.15);
+}
+
+.floating-card span {
+    font-size: 28px;
+}
+
+.floating-card strong {
+    display: block;
+
+    font-size: 14px;
+}
+
+.floating-card small {
+    color: #8498a0;
+}
+
+
+/* ================= SECTIONS ================= */
+
+.tacos-section,
+.features,
+.about {
+    padding: 100px 7%;
+}
+
+.section-title {
+    text-align: center;
+
+    margin-bottom: 50px;
+}
+
+.section-title span,
+.about-content > span {
+    color: #e99b32;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    font-weight: 800;
+}
+
+.section-title h2 {
+    margin-top: 12px;
+
+    font-size: 40px;
+
+    color: #173b4d;
+}
+
+.section-title p {
+    margin-top: 10px;
+
+    color: #7b8e96;
+}
+
+
+/* ================= TACOS ================= */
+
+.taco-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 30px;
+}
+
+.taco-card {
+    background: white;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    border: 1px solid #edf1f2;
+
+    transition: 0.3s;
+}
+
+.taco-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow: 0 20px 45px rgba(30, 70, 85, 0.12);
+}
+
+.taco-image {
+    height: 230px;
+
+    overflow: hidden;
+}
+
+.taco-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: 0.4s;
+}
+
+.taco-card:hover .taco-image img {
+    transform: scale(1.06);
+}
+
+.taco-info {
+    padding: 25px;
+}
+
+.taco-info h3 {
+    font-size: 20px;
+}
+
+.taco-info p {
+    margin: 12px 0 20px;
+
+    color: #71858e;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+.taco-info a {
+    color: #e99b32;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+
+/* ================= FEATURES ================= */
+
+.features {
+    background: #f7fbfc;
+}
+
+.features-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 30px;
+
+    max-width: 1000px;
+
+    margin: auto;
+}
+
+.feature {
+    text-align: center;
+
+    padding: 35px;
+}
+
+.feature-icon {
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fff;
+
+    border-radius: 50%;
+
+    font-size: 30px;
+
+    box-shadow: 0 8px 25px rgba(30, 70, 85, 0.08);
+}
+
+.feature h3 {
+    margin-bottom: 10px;
+}
+
+.feature p {
+    color: #71858e;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* ================= ABOUT ================= */
+
+.about {
+    display: flex;
+
+    align-items: center;
+
+    gap: 80px;
+}
+
+.about-image,
+.about-content {
+    width: 50%;
+}
+
+.about-image img {
+    width: 100%;
+
+    height: 450px;
+
+    object-fit: cover;
+
+    border-radius: 30px;
+}
+
+.about-content h2 {
+    margin: 15px 0 20px;
+
+    font-size: 48px;
+
+    line-height: 1.1;
+}
+
+.about-content p {
+    margin-bottom: 15px;
+
+    color: #71858e;
+
+    line-height: 1.8;
+}
+
+
+/* ================= CTA ================= */
+
+.cta {
+    text-align: center;
+
+    padding: 100px 20px;
+
+    background: #173b4d;
+
+    color: white;
+}
+
+.cta h2 {
+    font-size: 42px;
+}
+
+.cta p {
+    margin: 15px 0 30px;
+
+    color: #c7d6dc;
+}
+
+.cta-button {
+    display: inline-block;
+
+    padding: 16px 30px;
+
+    background: #e99b32;
+
+    color: white;
+
+    border-radius: 30px;
+
+    text-decoration: none;
+
+    font-weight: 700;
+}
+
+
+/* ================= FOOTER ================= */
+
+.footer {
+    min-height: 100px;
+
+    padding: 30px 7%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    background: #102f3e;
+
+    color: #9db0b8;
+
+    font-size: 12px;
+}
+
+.footer-logo img {
+    width: 100px;
+
+    filter: brightness(0) invert(1);
+}
+
+.footer-links {
+    display: flex;
+
+    gap: 20px;
+}
+
+.footer-links a {
+    color: #c4d1d6;
+
+    text-decoration: none;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 900px) {
+
+    .navigation {
+        display: none;
+    }
+
+    .hero {
+        flex-direction: column;
+
+        padding-top: 60px;
+    }
+
+    .hero-content,
+    .hero-image {
+        width: 100%;
+    }
+
+    .hero-image > img {
+        height: 350px;
+    }
+
+    .taco-grid,
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about {
+        flex-direction: column;
+    }
+
+    .about-image,
+    .about-content {
+        width: 100%;
+    }
+
+    .footer {
+        flex-direction: column;
+
+        text-align: center;
+    }
+}
+
+
+@media (max-width: 550px) {
+
+    .header {
+        padding: 0 20px;
+    }
+
+    .header-create {
+        display: none;
+    }
+
+    .hero {
+        padding: 50px 20px;
+    }
+
+    .hero h1 {
+        font-size: 48px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .hero-buttons a {
+        text-align: center;
+    }
+
+    .tacos-section,
+    .features,
+    .about {
+        padding: 70px 20px;
+    }
+
+    .section-title h2 {
+        font-size: 32px;
+    }
+
+    .about-content h2 {
+        font-size: 38px;
+    }
+}

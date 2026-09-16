@@ -22,7 +22,7 @@ import org.springframework.web.bind.support.SessionStatus;
 @Slf4j
 @Controller
 @RequestMapping("/orders")
-@SessionAttributes("order")
+@SessionAttributes("tacoOrder")
 public class OrderController {
 
     @Value("${taco.orders.page-size:20}")

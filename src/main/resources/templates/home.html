@@ -1,11 +1,356 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Taco Cloud</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TacoCloud — Create Your Perfect Taco</title>
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+
+    <link rel="stylesheet" th:href="@{/css/home.css}">
 </head>
+
 <body>
-<h1>Welcome to...</h1>
-<img th:src="@{/images/TacoCloud.png}"/>
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="logo">
+        <img th:src="@{/images/TacoCloud.png}" alt="TacoCloud">
+    </div>
+
+    <nav class="navigation">
+        <a href="/">Home</a>
+        <a href="#tacos">Our tacos</a>
+        <a href="#about">About us</a>
+    </nav>
+
+    <div class="header-buttons">
+        <a href="/login" class="login-button">Login</a>
+        <a href="/design" class="header-create">Create Taco</a>
+    </div>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <span class="hero-label">🌮 WELCOME TO TACO CLOUD</span>
+
+        <h1>
+            Create your
+            <span>perfect taco.</span>
+        </h1>
+
+        <p>
+            Choose your favorite ingredients, create your own recipe
+            and enjoy a taco made exactly the way you like it.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="/design" class="primary-button">
+                Create my taco →
+            </a>
+
+            <a href="#about" class="secondary-button">
+                Learn more
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-image">
+
+        <img
+                src="https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?auto=format&fit=crop&w=1000&q=85"
+                alt="Delicious tacos">
+
+        <div class="floating-card">
+
+            <span>⭐</span>
+
+            <div>
+                <strong>Fresh & tasty</strong>
+                <small>Made your way</small>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= TACOS ================= -->
+
+<section class="tacos-section" id="tacos">
+
+    <div class="section-title">
+
+        <span>OUR FAVORITES</span>
+
+        <h2>Discover our tacos</h2>
+
+        <p>
+            Get inspired or create something completely new.
+        </p>
+
+    </div>
+
+
+    <div class="taco-grid">
+
+
+        <!-- TACO 1 -->
+
+        <div class="taco-card">
+
+            <div class="taco-image">
+
+                <img
+                        src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&fit=crop&w=700&q=85"
+                        alt="Classic taco">
+
+            </div>
+
+            <div class="taco-info">
+
+                <h3>Classic Taco</h3>
+
+                <p>
+                    Beef, fresh lettuce, tomatoes,
+                    cheese and salsa.
+                </p>
+
+                <a href="/design">
+                    Create this taco →
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- TACO 2 -->
+
+        <div class="taco-card">
+
+            <div class="taco-image">
+
+                <img
+                        src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=700&q=85"
+                        alt="Spicy taco">
+
+            </div>
+
+            <div class="taco-info">
+
+                <h3>Spicy Taco</h3>
+
+                <p>
+                    Spicy beef, jalapeños,
+                    onions and hot salsa.
+                </p>
+
+                <a href="/design">
+                    Create this taco →
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- TACO 3 -->
+
+        <div class="taco-card">
+
+            <div class="taco-image">
+
+                <img
+                        src="https://images.unsplash.com/photo-1613514785940-daed07799d9b?auto=format&fit=crop&w=700&q=85"
+                        alt="Chicken taco">
+
+            </div>
+
+            <div class="taco-info">
+
+                <h3>Chicken Taco</h3>
+
+                <p>
+                    Grilled chicken, avocado,
+                    cheese and fresh vegetables.
+                </p>
+
+                <a href="/design">
+                    Create this taco →
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FEATURES ================= -->
+
+<section class="features">
+
+    <div class="section-title">
+
+        <span>WHY TACO CLOUD?</span>
+
+        <h2>Made for taco lovers</h2>
+
+    </div>
+
+
+    <div class="features-grid">
+
+        <div class="feature">
+
+            <div class="feature-icon">🥑</div>
+
+            <h3>Fresh ingredients</h3>
+
+            <p>
+                Choose from a variety of fresh
+                and delicious ingredients.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">🌮</div>
+
+            <h3>Your recipe</h3>
+
+            <p>
+                Combine ingredients and create
+                a taco that is uniquely yours.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">❤️</div>
+
+            <h3>Made with love</h3>
+
+            <p>
+                Every taco is created with
+                passion and a little bit of fun.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section class="about" id="about">
+
+    <div class="about-image">
+
+        <img
+                src="https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?auto=format&fit=crop&w=1000&q=85"
+                alt="Taco Cloud">
+
+    </div>
+
+
+    <div class="about-content">
+
+        <span>ABOUT TACO CLOUD</span>
+
+        <h2>
+            Your taco.
+            <br>
+            Your rules.
+        </h2>
+
+        <p>
+            Taco Cloud is a place where everyone can become
+            a taco creator.
+        </p>
+
+        <p>
+            Choose your tortilla, add your favorite protein,
+            vegetables, cheese and toppings. Mix everything
+            together and create something delicious.
+        </p>
+
+        <a href="/about" class="primary-button">
+            About us →
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<section class="cta">
+
+    <h2>Ready to create your taco?</h2>
+
+    <p>
+        Your perfect taco is just a few clicks away.
+    </p>
+
+    <a href="/design" class="cta-button">
+        Start creating 🌮
+    </a>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="footer-logo">
+
+        <img th:src="@{/images/TacoCloud.png}" alt="TacoCloud">
+
+    </div>
+
+    <p>
+        © 2026 TacoCloud. Made for taco lovers.
+    </p>
+
+    <div class="footer-links">
+
+        <a href="#about">About</a>
+        <a href="/login">Login</a>
+        <a href="/design">Create Taco</a>
+
+    </div>
+
+</footer>
+
 </body>
 </html>
