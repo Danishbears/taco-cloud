@@ -2,7 +2,7 @@ package com.example.taco_cloud.security;
 
 
 import com.example.taco_cloud.data.User;
-import com.example.taco_cloud.jdbc.UserRepository;
+import com.example.taco_cloud.repositories.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -22,7 +22,6 @@ public class SecurityConfig {
     @Order(1)
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ: первая цепочка обрабатывает ТОЛЬКО запросы к /api/**
                 .securityMatcher("/api/**")
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/api/ingredients")
@@ -45,12 +44,17 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // Отключаем CSRF для локального тестирования
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**", "/images/**", "/styles.css", "/js/**").permitAll()
-                        .requestMatchers("/design", "/orders","/about").hasRole("USER")
-                        .requestMatchers("/", "/**").permitAll()
+                        .requestMatchers("/design", "/orders","/orders/**").authenticated()
+                        .requestMatchers("/", "/login", "/register", "/about").permitAll()
+                        .anyRequest().authenticated()
                 )
-                .formLogin(Customizer.withDefaults())
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/",true)
+                        .permitAll()
+                )
                 .oauth2Login(oauth2 -> oauth2
-                        .loginPage("/oauth2/authorization/taco-admin-client") // Кастомный URL авторизации из книги
+                        .loginPage("/login") // Кастомный URL авторизации из книги
                         .defaultSuccessUrl("/design")
                 )
                 .oauth2Client(Customizer.withDefaults()) // Добавлен .oauth2Client(withDefaults()) из книги

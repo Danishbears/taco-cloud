@@ -3,7 +3,7 @@ package com.example.taco_cloud.actuator;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.example.taco_cloud.jdbc.TacoRepository;
+import com.example.taco_cloud.repositories.TacoRepository;
 import org.springframework.boot.actuate.info.Info.Builder;
 import org.springframework.boot.actuate.info.InfoContributor;
 import org.springframework.stereotype.Component;

@@ -1,7 +1,7 @@
 package com.example.taco_cloud.controllers;
 
 import com.example.taco_cloud.data.Ingredient;
-import com.example.taco_cloud.jdbc.IngredientRepository;
+import com.example.taco_cloud.repositories.IngredientRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

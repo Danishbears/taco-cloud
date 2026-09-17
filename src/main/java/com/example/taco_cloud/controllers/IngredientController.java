@@ -2,7 +2,7 @@ package com.example.taco_cloud.controllers;
 
 
 import com.example.taco_cloud.data.Ingredient;
-import com.example.taco_cloud.jdbc.IngredientRepository;
+import com.example.taco_cloud.repositories.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

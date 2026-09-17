@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EnableJpaRepositories(basePackages = "com.example.taco_cloud.jdbc")
+@EnableJpaRepositories(basePackages = "com.example.taco_cloud.repositories")
 public class TacoCloudApplication {
 
 	public static void main(String[] args) {

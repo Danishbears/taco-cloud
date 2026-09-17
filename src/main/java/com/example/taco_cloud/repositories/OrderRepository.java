@@ -1,4 +1,4 @@
-package com.example.taco_cloud.jdbc;
+package com.example.taco_cloud.repositories;
 
 import com.example.taco_cloud.data.TacoOrder;
 import com.example.taco_cloud.data.User;

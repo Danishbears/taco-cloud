@@ -2,9 +2,9 @@ package com.example.taco_cloud.controllers;
 
 import com.example.taco_cloud.JSM.OrderMessagingService;
 import com.example.taco_cloud.data.TacoOrder;
-import com.example.taco_cloud.jdbc.OrderRepository;
+import com.example.taco_cloud.repositories.OrderRepository;
 import com.example.taco_cloud.support.ControllerTestSupport;
-import com.example.taco_cloud.jdbc.UserRepository;
+import com.example.taco_cloud.repositories.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

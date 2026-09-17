@@ -2,7 +2,7 @@ package com.example.taco_cloud.controllers;
 
 
 import com.example.taco_cloud.data.Taco;
-import com.example.taco_cloud.jdbc.TacoRepository;
+import com.example.taco_cloud.repositories.TacoRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;

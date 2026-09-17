@@ -1,4 +1,4 @@
-package com.example.taco_cloud.jdbc;
+package com.example.taco_cloud.repositories;
 
 import com.example.taco_cloud.data.Taco;
 import org.springframework.data.repository.PagingAndSortingRepository;

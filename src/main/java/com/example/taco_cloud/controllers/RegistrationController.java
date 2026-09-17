@@ -1,7 +1,7 @@
 package com.example.taco_cloud.controllers;
 
 import com.example.taco_cloud.form.RegistrationForm;
-import com.example.taco_cloud.jdbc.UserRepository;
+import com.example.taco_cloud.repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

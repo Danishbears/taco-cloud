@@ -1,4 +1,4 @@
-package com.example.taco_cloud.jdbc;
+package com.example.taco_cloud.repositories;
 
 import jakarta.annotation.Nullable;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
