@@ -37,6 +37,11 @@ public class Taco {
         this.ingredients.add(ingredient);
     }
 
-
+    public double getPrice(){
+        if(ingredients == null) return 0.0;
+        return ingredients.stream()
+                .mapToDouble(Ingredient::getPrice)
+                .sum();
+    }
 
 }

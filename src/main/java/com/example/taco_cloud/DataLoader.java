@@ -24,25 +24,25 @@ public class DataLoader {
             TacoRepository tacoRepo) {
         return args -> {
             Ingredient flourTortilla = new Ingredient(
-                    "FLTO", "Flour Tortilla", Ingredient.Type.WRAP);
+                    "FLTO", "Flour Tortilla", Ingredient.Type.WRAP, 1.00);
             Ingredient cornTortilla = new Ingredient(
-                    "COTO", "Corn Tortilla", Ingredient.Type.WRAP);
+                    "COTO", "Corn Tortilla", Ingredient.Type.WRAP,1.25);
             Ingredient groundBeef = new Ingredient(
-                    "GRBF", "Ground Beef", Ingredient.Type.PROTEIN);
+                    "GRBF", "Ground Beef", Ingredient.Type.PROTEIN,3.45);
             Ingredient carnitas = new Ingredient(
-                    "CARN", "Carnitas", Ingredient.Type.PROTEIN);
+                    "CARN", "Carnitas", Ingredient.Type.PROTEIN,3.99);
             Ingredient tomatoes = new Ingredient(
-                    "TMTO", "Diced Tomatoes", Ingredient.Type.VEGGIES);
+                    "TMTO", "Diced Tomatoes", Ingredient.Type.VEGGIES,1.00);
             Ingredient lettuce = new Ingredient(
-                    "LETC", "Lettuce", Ingredient.Type.VEGGIES);
+                    "LETC", "Lettuce", Ingredient.Type.VEGGIES,1.00);
             Ingredient cheddar = new Ingredient(
-                    "CHED", "Cheddar", Ingredient.Type.CHEESE);
+                    "CHED", "Cheddar", Ingredient.Type.CHEESE,1.50);
             Ingredient jack = new Ingredient(
-                    "JACK", "Monterrey Jack", Ingredient.Type.CHEESE);
+                    "JACK", "Monterrey Jack", Ingredient.Type.CHEESE,1.99);
             Ingredient salsa = new Ingredient(
-                    "SLSA", "Salsa", Ingredient.Type.SAUCE);
+                    "SLSA", "Salsa", Ingredient.Type.SAUCE,2.00);
             Ingredient sourCream = new Ingredient(
-                    "SRCR", "Sour Cream", Ingredient.Type.SAUCE);
+                    "SRCR", "Sour Cream", Ingredient.Type.SAUCE,0.60);
             repo.save(flourTortilla);
             repo.save(cornTortilla);
             repo.save(groundBeef);

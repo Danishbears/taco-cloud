@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Taco Cloud - Order History</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+<h1>Your Order History</h1>
+<a th:href="@{/design}">Design another taco</a> |
+<a th:href="@{/}">Home</a>
+<hr/>
+
+<div th:if="${#lists.isEmpty(orders)}">
+    <p>You haven't placed any orders yet!</p>
+</div>
+
+<div th:if="${!#lists.isEmpty(orders)}">
+    <ul>
+        <li th:each="order : ${orders}">
+            <strong th:text="${#dates.format(order.placedAt, 'dd-MMM-yyyy HH:mm')}">Date</strong><br/>
+            <span>Delivered to: <em th:text="${order.deliveryName}">Name</em></span><br/>
+            <span>Total Price: <strong th:text="${'$' + #numbers.formatDecimal(order.totalPrice, 1, 2)}">$0.00</strong></span>
+
+            <p><strong>Tacos in this order:</strong></p>
+            <ul>
+                <li th:each="taco : ${order.tacos}">
+                    <span th:text="${taco.name}">Taco Name</span>
+                    (<span th:text="${'$' + #numbers.formatDecimal(taco.price, 1, 2)}">$0.00</span>)
+                </li>
+            </ul>
+            <hr/>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

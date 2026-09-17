@@ -62,4 +62,11 @@ public class TacoOrder implements Serializable {
     public void addTaco(Taco taco){
         this.tacos.add(taco);
     }
+
+    public double getTotalPrice(){
+        if(tacos == null) return 0.0;
+        return tacos.stream()
+                .mapToDouble(Taco::getPrice)
+                .sum();
+    }
 }
