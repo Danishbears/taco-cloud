@@ -18,30 +18,7 @@
 
 <!-- ================= HEADER ================= -->
 
-<header class="header">
-
-    <div class="logo">
-        <img th:src="@{/images/TacoCloud.png}" alt="TacoCloud">
-    </div>
-
-    <nav class="navigation">
-        <a href="/">Home</a>
-        <a href="#tacos">Our tacos</a>
-        <a href="#about">About us</a>
-    </nav>
-
-    <div class="header-buttons">
-        <a href="/login" class="login-button">Login</a>
-        <a href="/design" class="header-create">Create Taco</a>
-    </div>
-
-    <a th:href="@{/notification}">
-        🔔 Notifications
-        <span th:if="${unreadCount > 0}" th:text="${unreadCount}" style="color: red; font-weight: bold;">(3)</span>
-    </a>
-
-</header>
-
+<div th:replace="~{fragments/header :: header}"></div>
 
 <!-- ================= HERO ================= -->
 
@@ -335,27 +312,7 @@
 
 <!-- ================= FOOTER ================= -->
 
-<footer class="footer">
-
-    <div class="footer-logo">
-
-        <img th:src="@{/images/TacoCloudDark.jpg}" alt="TacoCloudDark">
-
-    </div>
-
-    <p>
-        © 2026 TacoCloud. Made for taco lovers.
-    </p>
-
-    <div class="footer-links">
-
-        <a href="#about">About</a>
-        <a href="/login">Login</a>
-        <a href="/design">Create Taco</a>
-
-    </div>
-
-</footer>
+<div th:replace="~{fragments/footer :: footer}"></div>
 
 </body>
 </html>

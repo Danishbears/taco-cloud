@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<header class="header" th:fragment="header">
+
+    <div class="header-inner">
+
+        <!-- LOGO -->
+        <a th:href="@{/}" class="logo">
+            <img th:src="@{/images/TacoCloud.png}"
+                 alt="TacoCloud">
+        </a>
+
+
+        <!-- NAVIGATION -->
+        <nav class="navigation">
+
+            <a th:href="@{/}">
+                Home
+            </a>
+
+            <a th:href="@{/design}">
+                Our tacos
+            </a>
+
+            <a th:href="@{/about}">
+                About us
+            </a>
+
+        </nav>
+
+
+        <!-- RIGHT SIDE -->
+        <div class="header-actions">
+
+            <!-- NOTIFICATIONS -->
+            <a th:href="@{/notification}"
+               class="notification-button"
+               aria-label="Notifications">
+
+                <span class="notification-icon">🔔</span>
+
+                <span class="notification-count"
+                      th:if="${unreadCount != null && unreadCount > 0}"
+                      th:text="${unreadCount}">
+                    3
+                </span>
+
+            </a>
+
+
+            <!-- PROFILE -->
+            <a th:href="@{/profile}"
+               class="profile-button">
+
+                <span class="profile-icon">👤</span>
+
+                <span class="profile-text">
+                    Profile
+                </span>
+
+            </a>
+
+
+            <!-- CREATE TACO -->
+            <a th:href="@{/design}"
+               class="header-create">
+
+                Create Taco
+
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+</body>
+</html>

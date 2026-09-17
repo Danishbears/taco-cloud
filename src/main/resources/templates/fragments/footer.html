@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<footer class="footer" th:fragment="footer">
+
+    <div class="footer-content">
+
+        <div class="footer-logo">
+            <img th:src="@{/images/TacoCloudDark.jpg}"
+                 alt="TacoCloud">
+        </div>
+
+
+        <p>
+            © 2026 TacoCloud. Made for taco lovers.
+        </p>
+
+
+        <div class="footer-links">
+
+            <a th:href="@{/about}">
+                About
+            </a>
+
+            <a th:href="@{/notification}">
+                Notifications
+            </a>
+
+            <a th:href="@{/design}">
+                Create Taco
+            </a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
+</html>

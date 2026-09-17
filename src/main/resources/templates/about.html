@@ -14,25 +14,7 @@
 <body>
 
 <!-- HEADER -->
-<header class="site-header">
-    <div class="header-inner">
-
-        <a th:href="@{/about}" class="logo">
-            <img th:src="@{/images/TacoCloud.png}" alt="Taco Cloud">
-        </a>
-
-        <nav class="main-nav">
-            <a th:href="@{/}">Home</a>
-            <a th:href="@{/design}">Our tacos</a>
-            <a th:href="@{/about}">About us</a>
-        </nav>
-
-        <a th:href="@{/design}" class="header-button">
-            Create Taco
-        </a>
-
-    </div>
-</header>
+<div th:replace="~{fragments/header :: header}"></div>
 
 <!-- MAIN -->
 <main class="about-page">
@@ -286,28 +268,7 @@
 
 
 <!-- FOOTER -->
-<footer class="footer">
-
-    <div class="footer-content">
-
-        <div class="footer-logo">
-            <img th:src="@{/images/TacoCloudDark.jpg}"
-                 alt="TacoCloudDark">
-        </div>
-
-        <p>
-            © 2026 Taco Cloud. Built with ☕ and 🌮.
-        </p>
-
-        <div class="footer-links">
-            <a th:href="@{/}">Home</a>
-            <a th:href="@{/design}">Create Taco</a>
-            <a th:href="@{/about}">About</a>
-        </div>
-
-    </div>
-
-</footer>
+<div th:replace="~{fragments/footer :: footer}"></div>
 
 </body>
 </html>
