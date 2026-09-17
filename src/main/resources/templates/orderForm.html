@@ -1,53 +1,542 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Taco Cloud</title>
-    <link rel="stylesheet" th:href="@{/styles.css}" />
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>TacoCloud — Your Order</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/styles.css}" />
+
 </head>
+
 <body>
-<form method="POST" th:action="@{/logout}">
-    <input type="submit" value="Logout"/>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="header">
+
+    <a href="/" class="logo">
+        <img th:src="@{/images/TacoCloud.png}"
+             alt="TacoCloud">
+    </a>
+
+
+    <nav class="navigation">
+
+        <a href="/">Home</a>
+
+        <a href="/design">Create Taco</a>
+
+        <a href="/#about">About us</a>
+
+    </nav>
+
+
+    <!--
+        IMPORTANT:
+        Logout is a completely separate form.
+        Do not put it inside the order form.
+    -->
+
+    <div class="header-actions">
+
+        <form method="POST"
+              th:action="@{/logout}">
+
+            <button type="submit"
+                    class="logout-button">
+
+                Logout
+
+            </button>
+
+        </form>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================================================
+     PAGE INTRO
+========================================================= -->
+
+<section class="order-intro">
+
+    <span class="intro-label">
+        🌮 TACO CLOUD
+    </span>
+
+    <h1>
+        Your taco
+        <span>order.</span>
+    </h1>
+
+    <p>
+        Review your creations and tell us where
+        you'd like them delivered.
+    </p>
+
+</section>
+
+
+
+<!-- =========================================================
+     TACOS
+========================================================= -->
+
+<section class="order-tacos">
+
+    <div class="order-section-header">
+
+        <div>
+
+            <span class="section-label">
+                YOUR CREATIONS
+            </span>
+
+            <h2>Your tacos</h2>
+
+        </div>
+
+
+        <a href="/design"
+           class="add-taco-button">
+
+            + Design a taco
+
+        </a>
+
+    </div>
+
+
+    <!-- =====================================================
+         EMPTY ORDER
+    ====================================================== -->
+
+    <div class="empty-tacos"
+         th:if="${tacoOrder?.tacos == null || tacoOrder.tacos.isEmpty()}">
+
+        <div class="empty-icon">
+            🌮
+        </div>
+
+        <h3>
+            Your order is empty
+        </h3>
+
+        <p>
+            You haven't created any tacos yet.
+        </p>
+
+        <a href="/design"
+           class="primary-button">
+
+            Create my first taco →
+
+        </a>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         TACO LIST
+    ====================================================== -->
+
+    <div class="taco-order-list"
+         th:if="${tacoOrder?.tacos != null && !tacoOrder.tacos.isEmpty()}">
+
+
+        <div class="order-taco-card"
+             th:each="taco, tacoStat : ${tacoOrder.tacos}">
+
+
+            <div class="order-taco-icon">
+                🌮
+            </div>
+
+
+            <div class="order-taco-info">
+
+                <span>
+                    TACO <span th:text="${tacoStat.index + 1}">1</span>
+                </span>
+
+                <h3 th:text="${taco.name}">
+                    Taco Name
+                </h3>
+
+            </div>
+
+
+            <div class="order-taco-actions">
+
+                <!-- =========================================
+                     EDIT
+                     This is NOT a form.
+                ========================================== -->
+
+                <a th:href="@{/design/edit(index=${tacoStat.index})}"
+                   class="edit-taco">
+
+                    ✏ Edit
+
+                </a>
+
+
+                <!-- =========================================
+                     DELETE
+                     IMPORTANT:
+
+                     This form is completely separate from
+                     the main /orders form.
+                ========================================== -->
+
+                <form th:action="@{/design/delete}"
+                      method="post"
+                      class="delete-taco-form">
+
+                    <input type="hidden"
+                           name="index"
+                           th:value="${tacoStat.index}" />
+
+                    <button type="submit"
+                            class="delete-taco">
+
+                        🗑 Delete
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     ORDER FORM
+
+     IMPORTANT:
+     This form starts AFTER the taco list.
+
+     Delete forms are NOT inside this form.
+========================================================= -->
+
+<form method="POST"
+      th:action="@{/orders}"
+      th:object="${tacoOrder}"
+      class="order-form">
+
+
+    <!-- =====================================================
+         DELIVERY
+    ====================================================== -->
+
+    <section class="form-section">
+
+        <div class="form-section-header">
+
+            <span class="form-number">
+                01
+            </span>
+
+            <div>
+
+                <span class="section-label">
+                    DELIVERY
+                </span>
+
+                <h2>
+                    Where should we deliver?
+                </h2>
+
+                <p>
+                    Tell us where your taco masterpieces
+                    should arrive.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+
+            <!-- NAME -->
+
+            <div class="form-field full-width">
+
+                <label for="deliveryName">
+                    Full name
+                </label>
+
+                <input id="deliveryName"
+                       type="text"
+                       th:field="*{deliveryName}"
+                       placeholder="John Doe"/>
+
+            </div>
+
+
+            <!-- STREET -->
+
+            <div class="form-field full-width">
+
+                <label for="deliveryStreet">
+                    Street address
+                </label>
+
+                <input id="deliveryStreet"
+                       type="text"
+                       th:field="*{deliveryStreet}"
+                       placeholder="123 Taco Street"/>
+
+            </div>
+
+
+            <!-- CITY -->
+
+            <div class="form-field">
+
+                <label for="deliveryCity">
+                    City
+                </label>
+
+                <input id="deliveryCity"
+                       type="text"
+                       th:field="*{deliveryCity}"
+                       placeholder="Paris"/>
+
+            </div>
+
+
+            <!-- STATE -->
+
+            <div class="form-field">
+
+                <label for="deliveryState">
+                    State / Region
+                </label>
+
+                <input id="deliveryState"
+                       type="text"
+                       th:field="*{deliveryState}"
+                       placeholder="Île-de-France"/>
+
+            </div>
+
+
+            <!-- ZIP -->
+
+            <div class="form-field">
+
+                <label for="deliveryZip">
+                    Zip code
+                </label>
+
+                <input id="deliveryZip"
+                       type="text"
+                       th:field="*{deliveryZip}"
+                       placeholder="75001"/>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PAYMENT
+    ====================================================== -->
+
+    <section class="form-section">
+
+        <div class="form-section-header">
+
+            <span class="form-number">
+                02
+            </span>
+
+            <div>
+
+                <span class="section-label">
+                    PAYMENT
+                </span>
+
+                <h2>
+                    How would you like to pay?
+                </h2>
+
+                <p>
+                    Enter your payment details to complete
+                    your order.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+
+            <!-- CARD NUMBER -->
+
+            <div class="form-field full-width">
+
+                <label for="ccNumber">
+                    Credit card number
+                </label>
+
+                <input id="ccNumber"
+                       type="text"
+                       th:field="*{ccNumber}"
+                       placeholder="1234 5678 9012 3456"/>
+
+
+                <!-- KEEPING YOUR VALIDATION -->
+
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('ccNumber')}"
+                      th:errors="*{ccNumber}">
+
+                    CC Num Error
+
+                </span>
+
+            </div>
+
+
+            <!-- EXPIRATION -->
+
+            <div class="form-field">
+
+                <label for="ccExpiration">
+                    Expiration date
+                </label>
+
+                <input id="ccExpiration"
+                       type="text"
+                       th:field="*{ccExpiration}"
+                       placeholder="MM/YY"/>
+
+            </div>
+
+
+            <!-- CVV -->
+
+            <div class="form-field">
+
+                <label for="ccCVV">
+                    CVV
+                </label>
+
+                <input id="ccCVV"
+                       type="text"
+                       th:field="*{ccCVV}"
+                       placeholder="123"/>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SUBMIT
+    ====================================================== -->
+
+    <section class="order-submit">
+
+        <div>
+
+            <span class="section-label">
+                READY TO GO?
+            </span>
+
+            <h2>
+                Let's get your tacos delivered.
+            </h2>
+
+            <p>
+                Check your information and place your order.
+            </p>
+
+        </div>
+
+
+        <button type="submit"
+                class="place-order-button">
+
+            Place My Order 🌮
+
+        </button>
+
+    </section>
+
+
 </form>
-<form method="POST" th:action="@{/orders}" th:object="${tacoOrder}">
-    <h1>Order your taco creations!</h1>
-    <img th:src="@{/images/TacoCloud.png}"/>
-    <h3>Your tacos in this order:</h3>
-    <a th:href="@{/design}" id="another">Design another taco</a><br/>
-    <ul>
-        <li th:each="taco : ${tacoOrder.tacos}">
-            <span th:text="${taco.name}">taco name</span></li>
-    </ul>
-    <h3>Deliver my taco masterpieces to...</h3>
-    <label for="deliveryName">Name: </label>
-    <input type="text" th:field="*{deliveryName}"/>
-    <br/>
-    <label for="deliveryStreet">Street address: </label>
-    <input type="text" th:field="*{deliveryStreet}"/>
-    <br/>
-    <label for="deliveryCity">City: </label>
-    <input type="text" th:field="*{deliveryCity}"/>
-    <br/>
-    <label for="deliveryState">State: </label>
-    <input type="text" th:field="*{deliveryState}"/>
-    <br/>
-    <label for="deliveryZip">Zip code: </label>
-    <input type="text" th:field="*{deliveryZip}"/>
-    <br/>
-    <h3>Here's how I'll pay...</h3>
-    <label for="ccNumber">Credit Card #: </label>
-    <input type="text" th:field="*{ccNumber}"/>
-    <span class="validationError"
-          th:if="${#fields.hasErrors('ccNumber')}"
-          th:errors="*{ccNumber}">CC Num Error</span>
-    <br/>
-    <label for="ccExpiration">Expiration: </label>
-    <input type="text" th:field="*{ccExpiration}"/>
-    <br/>
-    <label for="ccCVV">CVV: </label>
-    <input type="text" th:field="*{ccCVV}"/>
-    <br/>
-    <input type="submit" value="Submit Order"/>
-</form>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="footer">
+
+    <div class="footer-logo">
+
+        <img th:src="@{/images/TacoCloud.png}"
+             alt="TacoCloud">
+
+    </div>
+
+    <p>
+        © 2026 TacoCloud. Made for taco lovers.
+    </p>
+
+    <div class="footer-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/#about">
+            About
+        </a>
+
+        <a href="/design">
+            Create Taco
+        </a>
+
+    </div>
+
+</footer>
+
+
 </body>
 </html>

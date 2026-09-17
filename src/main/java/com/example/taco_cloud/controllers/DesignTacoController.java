@@ -65,6 +65,46 @@ public class DesignTacoController {
         return "design";
     }
 
+    @PostMapping("/delete")
+    public String deleteTaco(@RequestParam("index") int index,
+                             @ModelAttribute("tacoOrder") TacoOrder tacoOrder) {
+
+        System.out.println("=== Trying to delete a taco ===");
+        System.out.println("Index: " + index);
+
+        if (tacoOrder != null && tacoOrder.getTacos() != null) {
+            System.out.println("Amount of tacos before delete operation " + tacoOrder.getTacos().size());
+
+            if (index >= 0 && index < tacoOrder.getTacos().size()) {
+                tacoOrder.getTacos().remove(index);
+                System.out.println("Taco was successfully deleted " + index);
+            } else {
+                System.out.println("Error: wrong index");
+            }
+
+            System.out.println("Amount of tacos after delete operation " + tacoOrder.getTacos().size());
+        } else {
+            System.out.println("Error: tacoOrder or list of tacos equal null!");
+        }
+
+        return "redirect:/orders/current";
+    }
+
+    @GetMapping("/edit")
+    public String editTaco(@RequestParam("index") int index,
+                           @ModelAttribute TacoOrder tacoOrder,
+                           Model model) {
+        if (index >= 0 && index < tacoOrder.getTacos().size()) {
+            Taco tacoToEdit = tacoOrder.getTacos().remove(index);
+            model.addAttribute("taco", tacoToEdit);
+        } else {
+            model.addAttribute("taco", new Taco());
+        }
+
+        return "design";
+    }
+
+
     @PostMapping
     public String processTaco(@Valid Taco taco, Errors errors,
                               @ModelAttribute TacoOrder tacoOrder) {

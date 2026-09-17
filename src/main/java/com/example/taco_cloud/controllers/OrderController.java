@@ -41,7 +41,7 @@ public class OrderController {
     // --- HTML Views (Thymeleaf) ---
 
     @GetMapping("/current")
-    public String orderForm() {
+    public String orderForm(TacoOrder tacoOrder) {
         return "orderForm";
     }
 
@@ -49,7 +49,7 @@ public class OrderController {
     public String ordersForUser(@AuthenticationPrincipal User user, Model model) {
         Pageable pageable = PageRequest.of(0, pageSize);
         model.addAttribute("orders", orderRepo.findByUserOrderByPlacedAtDesc(user, pageable));
-        return "orderList";
+        return "orderForm";
     }
 
     @PostMapping
