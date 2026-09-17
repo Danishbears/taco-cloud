@@ -1,75 +1,478 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>User Profile - Taco Cloud</title>
-    <link rel="stylesheet" th:href="@{/styles.css}" />
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile - Taco Cloud</title>
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+
 </head>
-<body>
 
-<h1>User Profile</h1>
-
-    <a th:href="@{/notification}">
-        🔔 <span th:if="${unreadCount > 0}" th:text="'(' + ${unreadCount} + ' new)'" style="color: red;"></span>
-    </a>
+<body class="profile-page">
 
 
-<div th:replace="~{notification :: notificationList}"></div>
+<!-- ================= HEADER ================= -->
 
-<div>
-    <p>Logged in as: <strong th:text="${user.username}">Username</strong></p>
+<header class="profile-header">
 
-    <form method="POST" th:action="@{/logout}">
-        <button type="submit">Logout</button>
-    </form>
-</div>
+    <div class="profile-header-inner">
 
-<hr/>
+        <!-- LOGO -->
 
-<p><a th:href="@{/orders/history}">View Order History</a> | <a th:href="@{/design}">Design a Taco</a></p>
+        <a th:href="@{/}" class="profile-header-logo">
 
-<div th:if="${param.success}">
-    <p style="color: green;">Profile updated successfully!</p>
-</div>
+            <img th:src="@{/images/TacoCloud.png}"
+                 alt="TacoCloud">
 
-<h2>Edit Personal & Delivery Info</h2>
+        </a>
 
-<form method="POST" th:action="@{/profile}" th:object="${profileForm}">
-    <div>
-        <label for="fullname">Full Name: </label>
-        <input type="text" th:field="*{fullname}" id="fullname"/>
+
+        <!-- BACK TO HOME -->
+
+        <a th:href="@{/}" class="profile-home-link">
+            ← Back to Home
+        </a>
+
+
+        <!-- USER -->
+
+        <div class="profile-header-user">
+
+            <span class="profile-header-name"
+                  th:text="${user.username}">
+                Username
+            </span>
+
+
+            <form method="POST"
+                  th:action="@{/logout}"
+                  class="profile-logout-form">
+
+                <button type="submit"
+                        class="profile-logout-button">
+                    Logout
+                </button>
+
+            </form>
+
+        </div>
+
     </div>
-    <br/>
-    <div>
-        <label for="street">Street Address: </label>
-        <input type="text" th:field="*{street}" id="street"/>
+
+</header>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="profile-container">
+
+
+    <!-- PROFILE INTRO -->
+
+    <section class="profile-intro">
+
+        <div class="profile-avatar">
+
+            <span th:text="${#strings.substring(user.username, 0, 1).toUpperCase()}">
+                U
+            </span>
+
+        </div>
+
+
+        <div>
+
+            <span class="section-label">
+                MY ACCOUNT
+            </span>
+
+            <h1>
+                Welcome,
+                <span th:text="${user.username}">
+                    User
+                </span>
+            </h1>
+
+            <p>
+                Manage your personal information and delivery details.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- SUCCESS MESSAGE -->
+
+    <div class="profile-success"
+         th:if="${param.success}">
+
+        <span class="success-icon">✓</span>
+
+        <div>
+            <strong>Profile updated</strong>
+
+            <p>
+                Your personal information has been saved successfully.
+            </p>
+        </div>
+
     </div>
-    <br/>
-    <div>
-        <label for="city">City: </label>
-        <input type="text" th:field="*{city}" id="city"/>
+
+
+    <!-- PROFILE CONTENT -->
+
+    <div class="profile-grid">
+
+
+        <!-- PERSONAL INFORMATION -->
+
+        <section class="profile-card">
+
+            <div class="profile-card-header">
+
+                <div>
+
+                    <span class="card-label">
+                        ACCOUNT
+                    </span>
+
+                    <h2>
+                        Personal information
+                    </h2>
+
+                </div>
+
+                <span class="card-icon">
+                    👤
+                </span>
+
+            </div>
+
+
+            <div class="account-info">
+
+                <div class="account-info-row">
+
+                    <span>
+                        Username
+                    </span>
+
+                    <strong th:text="${user.username}">
+                        Username
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- QUICK ACTIONS -->
+
+        <section class="profile-card">
+
+            <div class="profile-card-header">
+
+                <div>
+
+                    <span class="card-label">
+                        QUICK ACTIONS
+                    </span>
+
+                    <h2>
+                        Taco Cloud
+                    </h2>
+
+                </div>
+
+                <span class="card-icon">
+                    🌮
+                </span>
+
+            </div>
+
+
+            <div class="profile-actions">
+
+                <a th:href="@{/orders/history}"
+                   class="profile-action">
+
+                    <span class="action-icon">
+                        📦
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Order History
+                        </strong>
+
+                        <small>
+                            View your previous orders
+                        </small>
+
+                    </div>
+
+                    <span class="action-arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+                <a th:href="@{/design}"
+                   class="profile-action">
+
+                    <span class="action-icon">
+                        🌮
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Create a Taco
+                        </strong>
+
+                        <small>
+                            Design your next creation
+                        </small>
+
+                    </div>
+
+                    <span class="action-arrow">
+                        →
+                    </span>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
     </div>
-    <br/>
-    <div>
-        <label for="state">State: </label>
-        <input type="text" th:field="*{state}" id="state"/>
-    </div>
-    <br/>
-    <div>
-        <label for="zip">Zip Code: </label>
-        <input type="text" th:field="*{zip}" id="zip"/>
-    </div>
-    <br/>
-    <div>
-        <label for="phoneNumber">Phone Number: </label>
-        <input type="text" th:field="*{phoneNumber}" id="phoneNumber"/>
-    </div>
-    <br/>
-    <h2>Your Order History</h2>
-    <div th:replace="~{orderHistory :: orderList}">
-    </div>
-    <button type="submit">Save Changes</button>
-</form>
+
+
+    <!-- DELIVERY INFORMATION -->
+
+    <section class="profile-card profile-form-card">
+
+        <div class="profile-card-header">
+
+            <div>
+
+                <span class="card-label">
+                    DELIVERY
+                </span>
+
+                <h2>
+                    Personal & delivery information
+                </h2>
+
+                <p>
+                    Save your details to make future orders faster.
+                </p>
+
+            </div>
+
+            <span class="card-icon">
+                📍
+            </span>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <form method="POST"
+              th:action="@{/profile}"
+              th:object="${profileForm}"
+              class="profile-form">
+
+
+            <div class="form-section-title">
+                Contact information
+            </div>
+
+
+            <div class="profile-form-grid">
+
+                <div class="profile-form-group">
+
+                    <label for="fullname">
+                        Full Name
+                    </label>
+
+                    <input type="text"
+                           th:field="*{fullname}"
+                           id="fullname"
+                           placeholder="Your full name">
+
+                </div>
+
+
+                <div class="profile-form-group">
+
+                    <label for="phoneNumber">
+                        Phone Number
+                    </label>
+
+                    <input type="text"
+                           th:field="*{phoneNumber}"
+                           id="phoneNumber"
+                           placeholder="Your phone number">
+
+                </div>
+
+            </div>
+
+
+            <div class="form-section-title">
+                Delivery address
+            </div>
+
+
+            <div class="profile-form-grid">
+
+                <div class="profile-form-group profile-form-full">
+
+                    <label for="street">
+                        Street Address
+                    </label>
+
+                    <input type="text"
+                           th:field="*{street}"
+                           id="street"
+                           placeholder="Street and house number">
+
+                </div>
+
+
+                <div class="profile-form-group">
+
+                    <label for="city">
+                        City
+                    </label>
+
+                    <input type="text"
+                           th:field="*{city}"
+                           id="city"
+                           placeholder="City">
+
+                </div>
+
+
+                <div class="profile-form-group">
+
+                    <label for="state">
+                        State
+                    </label>
+
+                    <input type="text"
+                           th:field="*{state}"
+                           id="state"
+                           placeholder="State">
+
+                </div>
+
+
+                <div class="profile-form-group">
+
+                    <label for="zip">
+                        ZIP Code
+                    </label>
+
+                    <input type="text"
+                           th:field="*{zip}"
+                           id="zip"
+                           placeholder="ZIP code">
+
+                </div>
+
+            </div>
+
+
+            <div class="profile-form-footer">
+
+                <span>
+                    Your information is used for delivery.
+                </span>
+
+                <button type="submit"
+                        class="profile-save-button">
+
+                    Save Changes
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </section>
+
+
+    <!-- ORDER HISTORY -->
+
+    <section class="profile-card order-history-card">
+
+        <div class="profile-card-header">
+
+            <div>
+
+                <span class="card-label">
+                    YOUR ORDERS
+                </span>
+
+                <h2>
+                    Order History
+                </h2>
+
+                <p>
+                    Take a look at your previous Taco Cloud orders.
+                </p>
+
+            </div>
+
+            <a th:href="@{/orders/history}"
+               class="view-all-orders">
+
+                View all →
+
+            </a>
+
+        </div>
+
+
+        <!-- EXISTING ORDER HISTORY LOGIC -->
+
+        <div class="order-history-content">
+
+            <div th:replace="~{orderHistory :: orderList}">
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
 
 </body>
 </html>
