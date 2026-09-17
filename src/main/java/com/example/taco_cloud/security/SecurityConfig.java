@@ -45,7 +45,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // Отключаем CSRF для локального тестирования
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**", "/images/**", "/styles.css", "/js/**").permitAll()
-                        .requestMatchers("/design", "/orders").hasRole("USER")
+                        .requestMatchers("/design", "/orders","/about").hasRole("USER")
                         .requestMatchers("/", "/**").permitAll()
                 )
                 .formLogin(Customizer.withDefaults())

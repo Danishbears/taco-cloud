@@ -528,9 +528,8 @@ body {
 }
 
 .footer-logo img {
-    width: 100px;
-
-    filter: brightness(0) invert(1);
+    width: 120px;
+    height: auto;
 }
 
 .footer-links {

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About Us - Taco Cloud</title>
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+    <div class="header-inner">
+
+        <a th:href="@{/about}" class="logo">
+            <img th:src="@{/images/TacoCloud.png}" alt="Taco Cloud">
+        </a>
+
+        <nav class="main-nav">
+            <a th:href="@{/}">Home</a>
+            <a th:href="@{/design}">Our tacos</a>
+            <a th:href="@{/about}">About us</a>
+        </nav>
+
+        <a th:href="@{/design}" class="header-button">
+            Create Taco
+        </a>
+
+    </div>
+</header>
+
+<!-- MAIN -->
+<main class="about-page">
+
+    <!-- HERO -->
+    <section class="about-hero">
+
+        <div class="about-hero-content">
+
+            <span class="section-label">ABOUT TACO CLOUD</span>
+
+            <h1>
+                Your tacos.<br>
+                Your way.
+            </h1>
+
+            <p>
+                Taco Cloud is a web application that lets you create,
+                customize and order your own tacos using the ingredients
+                you love.
+            </p>
+
+            <a th:href="@{/design}" class="primary-button">
+                Start creating →
+            </a>
+
+        </div>
+
+        <div class="about-hero-logo">
+            <img th:src="@{/images/TacoCloud.png}"
+                 alt="Taco Cloud Logo">
+        </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+    <section class="about-section">
+
+        <div class="section-heading">
+            <span class="section-label">WHAT IS TACO CLOUD?</span>
+
+            <h2>
+                A taco experience<br>
+                built around you.
+            </h2>
+        </div>
+
+        <div class="about-text">
+
+            <p>
+                Taco Cloud is designed to make creating a taco simple,
+                interactive and fun. Instead of choosing from a fixed menu,
+                you can build your own combination from a selection of
+                wraps, proteins, cheeses, vegetables and sauces.
+            </p>
+
+            <p>
+                Once your taco is ready, you can give it a name, add it to
+                your order and make changes whenever you want. The goal is
+                simple: give you complete control over what ends up in your
+                taco.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+    <section class="about-features">
+
+        <div class="section-heading centered">
+            <span class="section-label">WHAT YOU CAN DO</span>
+
+            <h2>
+                Everything you need<br>
+                for your perfect taco.
+            </h2>
+        </div>
+
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">🌮</div>
+
+                <h3>Build your taco</h3>
+
+                <p>
+                    Choose your favourite ingredients and create
+                    a taco completely tailored to your taste.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">✏️</div>
+
+                <h3>Edit your creations</h3>
+
+                <p>
+                    Changed your mind? Edit tacos already added
+                    to your order and customize them again.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">📦</div>
+
+                <h3>Manage your order</h3>
+
+                <p>
+                    Review your taco creations, remove tacos you
+                    don't want and provide your delivery details.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- HOW IT WORKS -->
+    <section class="how-section">
+
+        <div class="section-heading">
+            <span class="section-label">HOW IT WORKS</span>
+
+            <h2>
+                From idea to taco<br>
+                in just a few steps.
+            </h2>
+        </div>
+
+
+        <div class="steps">
+
+            <div class="step">
+
+                <div class="step-number">01</div>
+
+                <div>
+                    <h3>Choose your ingredients</h3>
+
+                    <p>
+                        Pick a wrap, protein, cheese, vegetables
+                        and sauce for your creation.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">02</div>
+
+                <div>
+                    <h3>Name your creation</h3>
+
+                    <p>
+                        Give your taco a name so you can easily
+                        recognize it in your order.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">03</div>
+
+                <div>
+                    <h3>Review your order</h3>
+
+                    <p>
+                        Edit or remove your tacos and enter your
+                        delivery and payment information.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- TECHNOLOGY -->
+    <section class="technology-section">
+
+        <div class="technology-content">
+
+            <span class="section-label">BUILT WITH</span>
+
+            <h2>
+                A small application<br>
+                with a modern backend.
+            </h2>
+
+            <p>
+                Taco Cloud is built as a Spring Boot web application
+                with Thymeleaf used to render dynamic pages. The
+                application combines server-side templates, forms,
+                validation and application logic to provide the
+                complete taco-building experience.
+            </p>
+
+            <div class="tech-tags">
+                <span>Spring Boot</span>
+                <span>Thymeleaf</span>
+                <span>Java</span>
+                <span>HTML & CSS</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CTA -->
+    <section class="about-cta">
+
+        <span class="section-label">READY?</span>
+
+        <h2>
+            Let's build<br>
+            something delicious.
+        </h2>
+
+        <p>
+            Create your first taco and see what you can come up with.
+        </p>
+
+        <a th:href="@{/design}" class="primary-button">
+            Create my taco →
+        </a>
+
+    </section>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+
+    <div class="footer-content">
+
+        <div class="footer-logo">
+            <img th:src="@{/images/TacoCloudDark.jpg}"
+                 alt="TacoCloudDark">
+        </div>
+
+        <p>
+            © 2026 Taco Cloud. Built with ☕ and 🌮.
+        </p>
+
+        <div class="footer-links">
+            <a th:href="@{/}">Home</a>
+            <a th:href="@{/design}">Create Taco</a>
+            <a th:href="@{/about}">About</a>
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
+</html>
