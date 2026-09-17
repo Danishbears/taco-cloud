@@ -38,10 +38,27 @@ public class OrderController {
         this.userRepo = userRepo;
     }
 
-    // --- HTML Views (Thymeleaf) ---
+
 
     @GetMapping("/current")
-    public String orderForm(TacoOrder tacoOrder) {
+    public String orderForm(@AuthenticationPrincipal User user, @ModelAttribute  TacoOrder tacoOrder) {
+
+        if (tacoOrder.getDeliveryName() == null) {
+            tacoOrder.setDeliveryName(user.getFullname());
+        }
+        if (tacoOrder.getDeliveryStreet() == null) {
+            tacoOrder.setDeliveryStreet(user.getStreet());
+        }
+        if (tacoOrder.getDeliveryCity() == null) {
+            tacoOrder.setDeliveryCity(user.getCity());
+        }
+        if (tacoOrder.getDeliveryState() == null) {
+            tacoOrder.setDeliveryState(user.getState());
+        }
+        if (tacoOrder.getDeliveryZip() == null) {
+            tacoOrder.setDeliveryZip(user.getZip());
+        }
+
         return "orderForm";
     }
 

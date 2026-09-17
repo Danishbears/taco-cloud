@@ -10,7 +10,7 @@
 <a th:href="@{/design}">Design another taco</a> |
 <a th:href="@{/}">Home</a>
 <hr/>
-
+<div th:fragment="orderList">
 <div th:if="${#lists.isEmpty(orders)}">
     <p>You haven't placed any orders yet!</p>
 </div>
@@ -32,6 +32,7 @@
             <hr/>
         </li>
     </ul>
+</div>
 </div>
 </body>
 </html>

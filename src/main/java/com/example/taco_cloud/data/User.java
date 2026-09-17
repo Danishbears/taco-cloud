@@ -20,20 +20,21 @@ public class User implements UserDetails {
 
     private static final long serialVersionUID = 1L;
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private final String username;
-    private final String password;
-    private final String fullname;
-    private final String street;
-    private final String city;
-    private final String state;
-    private final String zip;
-    private final String phoneNumber;
+    private String username;
+    private String password;
+    private String fullname;
+    private String street;
+    private  String city;
+    private  String state;
+    private  String zip;
+    private  String phoneNumber;
 
-    // Конструктор со всеми полями
     public User(String username, String password, String fullname, String street, String city, String state, String zip, String phoneNumber) {
         this.username = username;
         this.password = password;
@@ -45,7 +46,7 @@ public class User implements UserDetails {
         this.phoneNumber = phoneNumber;
     }
 
-    // Упрощенный конструктор для DataLoader (как в книге)
+
     public User(String username, String password, String role) {
         this.username = username;
         this.password = password;
@@ -56,6 +57,7 @@ public class User implements UserDetails {
         this.zip = null;
         this.phoneNumber = null;
     }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
