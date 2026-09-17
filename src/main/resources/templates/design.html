@@ -3,404 +3,222 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TacoCloud — Create Your Taco</title>
-
-    <link rel="stylesheet"
-          th:href="@{/css/styles.css}" />
-
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
 </head>
 
 <body>
 
-
 <!-- ================= HEADER ================= -->
-
 <div th:replace="~{fragments/header :: header}"></div>
 
 
-
 <!-- ================= PAGE INTRO ================= -->
-
 <section class="design-intro">
-
-    <span class="intro-label">
-        🌮 TACO CREATOR
-    </span>
-
-    <h1>
-        Build your
-        <span>perfect taco.</span>
-    </h1>
-
-    <p>
-        Choose your favorite ingredients and create
-        a taco that's completely yours.
-    </p>
-
+    <span class="intro-label">🌮 TACO CREATOR</span>
+    <h1>Build your <span>perfect taco.</span></h1>
+    <p>Choose your favorite ingredients and create a taco that's completely yours.</p>
 </section>
 
 
-
 <!-- ================= FORM ================= -->
-
-<form method="POST" th:action="@{/design}" th:object="${taco}"
-      class="taco-form">
-
+<form method="POST" th:action="@{/design}" th:object="${taco}" class="taco-form">
 
     <!-- ================= WRAPS ================= -->
-
     <section class="ingredient-section">
-
         <div class="ingredient-title">
-
             <span class="step-number">01</span>
-
             <div>
                 <h2>Choose your wrap</h2>
-
-                <p>
-                    Start with the perfect tortilla.
-                </p>
+                <p>Start with the perfect tortilla.</p>
             </div>
-
         </div>
-
 
         <div class="ingredient-grid">
-
-            <label th:each="ingredient : ${wrap}"
-                   class="ingredient-card">
-
+            <label th:each="ingredient : ${wrap}" class="ingredient-card">
                 <input th:field="*{ingredients}"
                        type="checkbox"
-                       th:value="${ingredient.id}"/>
+                       th:value="${ingredient.id}"
+                       th:data-price="${ingredient.price}"/>
 
                 <div class="ingredient-content">
-
-                    <div class="ingredient-icon">
-                        🌯
-                    </div>
-
+                    <div class="ingredient-icon">🌯</div>
                     <div>
-
-                        <strong th:text="${ingredient.name}">
-                            INGREDIENT
-                        </strong>
-
-                        <span>
-                            Tortilla
-                        </span>
-
+                        <strong th:text="${ingredient.name}">INGREDIENT</strong>
+                        <span th:text="'Tortilla • $' + ${#numbers.formatDecimal(ingredient.price, 1, 2)}">Tortilla • $0.00</span>
                     </div>
-
-                    <div class="checkmark">
-                        ✓
-                    </div>
-
+                    <div class="checkmark">✓</div>
                 </div>
-
             </label>
-
         </div>
-
     </section>
-
-
 
     <!-- ================= PROTEINS ================= -->
-
     <section class="ingredient-section">
-
         <div class="ingredient-title">
-
             <span class="step-number">02</span>
-
             <div>
                 <h2>Pick your protein</h2>
-
-                <p>
-                    Choose the heart of your taco.
-                </p>
+                <p>Choose the heart of your taco.</p>
             </div>
-
         </div>
-
 
         <div class="ingredient-grid">
-
-            <label th:each="ingredient : ${protein}"
-                   class="ingredient-card">
-
+            <label th:each="ingredient : ${protein}" class="ingredient-card">
                 <input th:field="*{ingredients}"
                        type="checkbox"
-                       th:value="${ingredient.id}"/>
+                       th:value="${ingredient.id}"
+                       th:data-price="${ingredient.price}"/>
 
                 <div class="ingredient-content">
-
-                    <div class="ingredient-icon">
-                        🥩
-                    </div>
-
+                    <div class="ingredient-icon">🥩</div>
                     <div>
-
-                        <strong th:text="${ingredient.name}">
-                            INGREDIENT
-                        </strong>
-
-                        <span>
-                            Protein
-                        </span>
-
+                        <strong th:text="${ingredient.name}">INGREDIENT</strong>
+                        <span th:text="'Protein • $' + ${#numbers.formatDecimal(ingredient.price, 1, 2)}">Protein • $0.00</span>
                     </div>
-
-                    <div class="checkmark">
-                        ✓
-                    </div>
-
+                    <div class="checkmark">✓</div>
                 </div>
-
             </label>
-
         </div>
-
     </section>
-
-
 
     <!-- ================= CHEESE ================= -->
-
     <section class="ingredient-section">
-
         <div class="ingredient-title">
-
             <span class="step-number">03</span>
-
             <div>
                 <h2>Choose your cheese</h2>
-
-                <p>
-                    Add something creamy and delicious.
-                </p>
+                <p>Add something creamy and delicious.</p>
             </div>
-
         </div>
-
 
         <div class="ingredient-grid">
-
-            <label th:each="ingredient : ${cheese}"
-                   class="ingredient-card">
-
+            <label th:each="ingredient : ${cheese}" class="ingredient-card">
                 <input th:field="*{ingredients}"
                        type="checkbox"
-                       th:value="${ingredient.id}"/>
+                       th:value="${ingredient.id}"
+                       th:data-price="${ingredient.price}"/>
 
                 <div class="ingredient-content">
-
-                    <div class="ingredient-icon">
-                        🧀
-                    </div>
-
+                    <div class="ingredient-icon">🧀</div>
                     <div>
-
-                        <strong th:text="${ingredient.name}">
-                            INGREDIENT
-                        </strong>
-
-                        <span>
-                            Cheese
-                        </span>
-
+                        <strong th:text="${ingredient.name}">INGREDIENT</strong>
+                        <span th:text="'Cheese • $' + ${#numbers.formatDecimal(ingredient.price, 1, 2)}">Cheese • $0.00</span>
                     </div>
-
-                    <div class="checkmark">
-                        ✓
-                    </div>
-
+                    <div class="checkmark">✓</div>
                 </div>
-
             </label>
-
         </div>
-
     </section>
-
-
 
     <!-- ================= VEGGIES ================= -->
-
     <section class="ingredient-section">
-
         <div class="ingredient-title">
-
             <span class="step-number">04</span>
-
             <div>
                 <h2>Choose your veggies</h2>
-
-                <p>
-                    Fresh vegetables make everything better.
-                </p>
+                <p>Fresh vegetables make everything better.</p>
             </div>
-
         </div>
-
 
         <div class="ingredient-grid">
-
-            <label th:each="ingredient : ${veggies}"
-                   class="ingredient-card">
-
+            <label th:each="ingredient : ${veggies}" class="ingredient-card">
                 <input th:field="*{ingredients}"
                        type="checkbox"
-                       th:value="${ingredient.id}"/>
+                       th:value="${ingredient.id}"
+                       th:data-price="${ingredient.price}"/>
 
                 <div class="ingredient-content">
-
-                    <div class="ingredient-icon">
-                        🥬
-                    </div>
-
+                    <div class="ingredient-icon">🥬</div>
                     <div>
-
-                        <strong th:text="${ingredient.name}">
-                            INGREDIENT
-                        </strong>
-
-                        <span>
-                            Vegetables
-                        </span>
-
+                        <strong th:text="${ingredient.name}">INGREDIENT</strong>
+                        <span th:text="'Vegetables • $' + ${#numbers.formatDecimal(ingredient.price, 1, 2)}">Vegetables • $0.00</span>
                     </div>
-
-                    <div class="checkmark">
-                        ✓
-                    </div>
-
+                    <div class="checkmark">✓</div>
                 </div>
-
             </label>
-
         </div>
-
     </section>
-
-
 
     <!-- ================= SAUCE ================= -->
-
     <section class="ingredient-section">
-
         <div class="ingredient-title">
-
             <span class="step-number">05</span>
-
             <div>
                 <h2>Select your sauce</h2>
-
-                <p>
-                    Finish your taco with the perfect sauce.
-                </p>
+                <p>Finish your taco with the perfect sauce.</p>
             </div>
-
         </div>
-
 
         <div class="ingredient-grid">
-
-            <label th:each="ingredient : ${sauce}"
-                   class="ingredient-card">
-
+            <label th:each="ingredient : ${sauce}" class="ingredient-card">
                 <input th:field="*{ingredients}"
                        type="checkbox"
-                       th:value="${ingredient.id}"/>
+                       th:value="${ingredient.id}"
+                       th:data-price="${ingredient.price}"/>
 
                 <div class="ingredient-content">
-
-                    <div class="ingredient-icon">
-                        🌶️
-                    </div>
-
+                    <div class="ingredient-icon">🌶️</div>
                     <div>
-
-                        <strong th:text="${ingredient.name}">
-                            INGREDIENT
-                        </strong>
-
-                        <span>
-                            Sauce
-                        </span>
-
+                        <strong th:text="${ingredient.name}">INGREDIENT</strong>
+                        <span th:text="'Sauce • $' + ${#numbers.formatDecimal(ingredient.price, 1, 2)}">Sauce • $0.00</span>
                     </div>
-
-                    <div class="checkmark">
-                        ✓
-                    </div>
-
+                    <div class="checkmark">✓</div>
                 </div>
-
             </label>
-
         </div>
-
     </section>
 
-
-
-    <!-- ================= NAME ================= -->
-
+    <!-- ================= NAME & SUBMIT ================= -->
     <section class="creation-section">
-
         <div class="creation-content">
-
-            <span class="intro-label">
-                ALMOST THERE
-            </span>
-
-            <h2>
-                Give your taco a name.
-            </h2>
-
-            <p>
-                Every great taco deserves a great name.
-            </p>
-
+            <span class="intro-label">ALMOST THERE</span>
+            <h2>Give your taco a name.</h2>
+            <p>Every great taco deserves a great name.</p>
 
             <div class="name-input">
-
-                <input type="text"
-                       th:field="*{name}"
-                       placeholder="My Awesome Taco"/>
-
+                <input type="text" th:field="*{name}" placeholder="My Awesome Taco"/>
             </div>
 
-
-            <button type="submit"
-                    class="submit-button">
-
-                Create My Taco 🌮
-
-            </button>
-
+            <button type="submit" class="submit-button">Create My Taco 🌮</button>
         </div>
-
     </section>
 
+    <!-- ================= FLOATING PRICE BAR ================= -->
+    <div class="total-bar">
+        <div class="total-info">
+            <span>Estimated Price:</span>
+            <strong id="total-price">$0.00</strong>
+        </div>
+    </div>
 
 </form>
 
-
-
 <!-- ================= FOOTER ================= -->
-
 <div th:replace="~{fragments/footer :: footer}"></div>
 
+<!-- ================= DYNAMIC PRICE SCRIPT ================= -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"][data-price]');
+        const totalPriceElement = document.getElementById("total-price");
+
+        function calculateTotal() {
+            let total = 0;
+            checkboxes.forEach(cb => {
+                if (cb.checked) {
+                    total += parseFloat(cb.getAttribute("data-price")) || 0;
+                }
+            });
+            totalPriceElement.textContent = "$" + total.toFixed(2);
+        }
+
+        checkboxes.forEach(cb => cb.addEventListener("change", calculateTotal));
+        calculateTotal();
+    });
+</script>
 
 </body>
 </html>

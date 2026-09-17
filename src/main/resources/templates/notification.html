@@ -1,28 +1,169 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Notifications - Taco Cloud</title>
-    <link rel="stylesheet" th:href="@{/styles.css}" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Notifications — TacoCloud</title>
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+
+    <link rel="stylesheet" th:href="@{/css/notification.css}">
 </head>
-<body>
-<h1>Your notifications 🔔</h1>
-<a th:href="@{/profile}">Back to profile</a> | <a th:href="@{/design}">Order a taco</a>
-<hr/>
 
-<div th:fragment="notificationList">
-    <div th:if="${#lists.isEmpty(notification)}">
-        <p>No notifications</p>
-    </div>
+<body class="notification-page">
 
-    <div th:if="${!#lists.isEmpty(notification)}">
-        <ul>
-            <li th:each="n : ${notification}" th:style="${!n.read} ? 'font-weight: bold;' : ''">
-                <span th:text="${#temporals.format(n.createdAt, 'dd-MMM-yyyy HH:mm')}">Time</span> —
-                <span th:text="${n.message}">Message</span>
-            </li>
-        </ul>
-    </div>
+<div class="notification-wrapper">
+
+    <!-- Header -->
+    <header class="notification-header">
+
+        <a th:href="@{/}" class="notification-logo">
+            <img th:src="@{/images/TacoCloud.png}" alt="TacoCloud">
+        </a>
+
+        <div class="notification-header-actions">
+            <a th:href="@{/profile}" class="profile-link">
+                <span>👤</span>
+                Profile
+            </a>
+
+            <a th:href="@{/design}" class="create-link">
+                Create Taco
+            </a>
+        </div>
+
+    </header>
+
+
+    <!-- Main -->
+    <main class="notification-container">
+
+        <div class="notification-title-row">
+
+            <div>
+                <span class="section-label">YOUR ACCOUNT</span>
+
+                <h1>
+                    Notifications
+                    <span class="title-bell">🔔</span>
+                </h1>
+
+                <p>
+                    Stay up to date with everything happening in TacoCloud.
+                </p>
+            </div>
+
+            <a th:href="@{/profile}" class="back-profile">
+                ← Back to Profile
+            </a>
+
+        </div>
+
+
+        <!-- Notification list -->
+        <div th:fragment="notificationList"
+             class="notification-list">
+
+            <!-- Empty state -->
+            <div th:if="${#lists.isEmpty(notification)}"
+                 class="empty-notifications">
+
+                <div class="empty-icon">🔔</div>
+
+                <h2>No notifications</h2>
+
+                <p>
+                    You're all caught up!
+                    New notifications will appear here.
+                </p>
+
+                <a th:href="@{/design}" class="empty-button">
+                    Create a Taco
+                </a>
+
+            </div>
+
+
+            <!-- Notifications -->
+            <div th:if="${!#lists.isEmpty(notification)}">
+
+                <div th:each="n : ${notification}"
+                     class="notification-item"
+                     th:classappend="${!n.read} ? ' unread' : ''">
+
+                    <!-- Unread indicator -->
+                    <div class="notification-status">
+                        <span class="status-dot"></span>
+                    </div>
+
+
+                    <!-- Icon -->
+                    <div class="notification-icon">
+                        <span>🔔</span>
+                    </div>
+
+
+                    <!-- Content -->
+                    <div class="notification-content">
+
+                        <div class="notification-message"
+                             th:text="${n.message}">
+                            Your notification message goes here.
+                        </div>
+
+                        <div class="notification-time">
+
+                            <span class="time-icon">🕐</span>
+
+                            <span th:text="${#temporals.format(n.createdAt, 'dd MMM yyyy · HH:mm')}">
+                                16 Sep 2026 · 14:30
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Read / unread label -->
+                    <div class="notification-badge"
+                         th:if="${!n.read}">
+                        New
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="notification-footer">
+
+        <div class="footer-logo">
+            <img th:src="@{/images/TacoCloudDark.jpg}"
+                 alt="TacoCloud">
+        </div>
+
+        <p>
+            © 2026 TacoCloud. Made for taco lovers.
+        </p>
+
+        <div class="footer-links">
+            <a th:href="@{/}">Home</a>
+            <a th:href="@{/profile}">Profile</a>
+            <a th:href="@{/design}">Create Taco</a>
+        </div>
+
+    </footer>
+
 </div>
+
 </body>
 </html>

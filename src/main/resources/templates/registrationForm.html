@@ -1,26 +1,93 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Registration - Taco Cloud</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register — TacoCloud</title>
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+
+    <link rel="stylesheet" th:href="@{/css/register.css}">
 </head>
-<body>
-<h1>Register</h1>
-<img th:src="@{/images/TacoCloud.png}"/>
 
-<form method="POST" th:action="@{/register}" id="registerForm">
-    <label for="username">Username: </label>
-    <input type="text" name="username" required/><br/>
+<body class="register-page">
 
-    <label for="password">Password: </label>
-    <input type="password" name="password" required/><br/>
+<div class="register-wrapper">
 
-    <label for="fullname">Full name: </label>
-    <input type="text" name="fullname"/><br/>
+    <div class="register-card">
 
-    <input type="submit" value="Register"/>
-</form>
+        <a th:href="@{/}" class="register-logo">
+            <img th:src="@{/images/TacoCloud.png}" alt="TacoCloud">
+        </a>
 
-<p>Already have an account? <a th:href="@{/login}">Login here</a></p>
+        <div class="register-header">
+            <h1>Create your account</h1>
+            <p>Join TacoCloud and start creating your perfect tacos.</p>
+        </div>
+
+        <form method="POST"
+              th:action="@{/register}"
+              id="registerForm"
+              class="register-form">
+
+            <div class="form-group">
+                <label for="username">Username</label>
+
+                <input type="text"
+                       name="username"
+                       id="username"
+                       placeholder="Choose a username"
+                       autocomplete="username"
+                       required/>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+
+                <input type="password"
+                       name="password"
+                       id="password"
+                       placeholder="Create a password"
+                       autocomplete="new-password"
+                       required/>
+            </div>
+
+            <div class="form-group">
+                <label for="fullname">
+                    Full name
+                    <span class="optional">(optional)</span>
+                </label>
+
+                <input type="text"
+                       name="fullname"
+                       id="fullname"
+                       placeholder="Your full name"
+                       autocomplete="name"/>
+            </div>
+
+            <button type="submit" class="register-button">
+                Create Account
+                <span>→</span>
+            </button>
+
+        </form>
+
+        <div class="login-prompt">
+            <span>Already have an account?</span>
+            <a th:href="@{/login}">Login here</a>
+        </div>
+
+    </div>
+
+    <a th:href="@{/}" class="back-home">
+        ← Back to TacoCloud
+    </a>
+
+</div>
+
 </body>
 </html>
