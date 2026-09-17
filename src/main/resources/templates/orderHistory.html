@@ -19,6 +19,7 @@
     <ul>
         <li th:each="order : ${orders}">
             <strong th:text="${#dates.format(order.placedAt, 'dd-MMM-yyyy HH:mm')}">Date</strong><br/>
+            <span>Status: <strong th:text="${order.status}" style="color: #d35400;">CREATED</strong></span><br/>
             <span>Delivered to: <em th:text="${order.deliveryName}">Name</em></span><br/>
             <span>Total Price: <strong th:text="${'$' + #numbers.formatDecimal(order.totalPrice, 1, 2)}">$0.00</strong></span>
 

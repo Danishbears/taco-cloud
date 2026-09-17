@@ -35,6 +35,11 @@
         <a href="/design" class="header-create">Create Taco</a>
     </div>
 
+    <a th:href="@{/notification}">
+        🔔 Notifications
+        <span th:if="${unreadCount > 0}" th:text="${unreadCount}" style="color: red; font-weight: bold;">(3)</span>
+    </a>
+
 </header>
 
 

@@ -26,6 +26,21 @@ import java.util.UUID;
 public class TacoOrder implements Serializable {
 
 
+    public enum Status{
+        CREATED,COOKING,DELIVERING,COMPLETED
+    }
+
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.CREATED;
+
+    @PrePersist
+    void placedAt(){
+        this.placedAt = new Date();
+        if(this.status == null){
+            this.status = Status.CREATED;
+        }
+    }
+
     @ManyToOne
     private User user;
 

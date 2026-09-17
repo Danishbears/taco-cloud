@@ -1,8 +1,10 @@
 package com.example.taco_cloud.controllers;
 
 import com.example.taco_cloud.JSM.OrderMessagingService;
+import com.example.taco_cloud.data.Notification;
 import com.example.taco_cloud.data.TacoOrder;
 import com.example.taco_cloud.data.User;
+import com.example.taco_cloud.repositories.NotificationRepository;
 import com.example.taco_cloud.repositories.OrderRepository;
 import com.example.taco_cloud.repositories.UserRepository;
 import jakarta.validation.Valid;
@@ -31,11 +33,13 @@ public class OrderController {
     private final OrderRepository orderRepo;
     private final OrderMessagingService messagingService;
     private final UserRepository userRepo;
+    private final NotificationRepository notificationRepo;
 
-    public OrderController(OrderRepository orderRepo, UserRepository userRepo, OrderMessagingService orderMessagingService) {
+    public OrderController(OrderRepository orderRepo, UserRepository userRepo, OrderMessagingService orderMessagingService, NotificationRepository notificationRepo) {
         this.messagingService = orderMessagingService;
         this.orderRepo = orderRepo;
         this.userRepo = userRepo;
+        this.notificationRepo = notificationRepo;
     }
 
 
@@ -76,9 +80,14 @@ public class OrderController {
         }
 
         order.setUser(user);
-        orderRepo.save(order);
+        order.setStatus(TacoOrder.Status.CREATED);
+        TacoOrder savedOrder = orderRepo.save(order);
+
+        String msg = "Your order #" + savedOrder.getId() + " accepted! Sending it to the kitchen";
+        notificationRepo.save(new Notification(user,msg));
+
         sessionStatus.setComplete();
-        return "redirect:/";
+        return "redirect:/profile";
     }
 
     @PostMapping(consumes = "application/json")

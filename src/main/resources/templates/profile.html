@@ -9,10 +9,16 @@
 
 <h1>User Profile</h1>
 
+    <a th:href="@{/notification}">
+        🔔 <span th:if="${unreadCount > 0}" th:text="'(' + ${unreadCount} + ' new)'" style="color: red;"></span>
+    </a>
+
+
+<div th:replace="~{notification :: notificationList}"></div>
+
 <div>
     <p>Logged in as: <strong th:text="${user.username}">Username</strong></p>
 
-    <!-- Кнопка выходя (Logout) -->
     <form method="POST" th:action="@{/logout}">
         <button type="submit">Logout</button>
     </form>
