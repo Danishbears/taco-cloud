@@ -87,7 +87,7 @@ public class OrderController {
         notificationRepo.save(new Notification(user,msg));
 
         sessionStatus.setComplete();
-        return "redirect:/profile";
+        return "redirect:/orders/" + savedOrder.getId() + "/track";
     }
 
     @PostMapping(consumes = "application/json")

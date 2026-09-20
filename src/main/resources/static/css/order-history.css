@@ -1,0 +1,776 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: #f5f7f8;
+    color: #173b4d;
+}
+
+.order-history-page {
+    min-height: 100vh;
+}
+
+.order-history-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =========================
+   HEADER
+   ========================= */
+
+.history-header {
+    width: 100%;
+    height: 82px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 40px;
+
+    background: #ffffff;
+    border-bottom: 1px solid #edf1f2;
+}
+
+.history-logo {
+    display: flex;
+    align-items: center;
+}
+
+.history-logo img {
+    display: block;
+    width: 125px;
+    height: auto;
+}
+
+.history-header-actions {
+    margin-left: auto;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+/* =========================
+   HEADER BUTTONS
+   ========================= */
+
+.history-profile,
+.history-create {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.history-profile {
+    gap: 7px;
+
+    padding: 10px 14px;
+
+    background: #ffffff;
+    border: 1px solid #e1e9ec;
+
+    color: #173b4d;
+}
+
+.history-profile:hover {
+    background: #f7f9fa;
+    border-color: #d2dfe3;
+    transform: translateY(-1px);
+}
+
+.history-create {
+    padding: 11px 18px;
+
+    background: #e99b32;
+    color: #ffffff;
+}
+
+.history-create:hover {
+    background: #d98d27;
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 20px rgba(233, 155, 50, 0.22);
+}
+
+
+/* =========================
+   MAIN
+   ========================= */
+
+.history-container {
+    width: 100%;
+    max-width: 950px;
+
+    margin: 0 auto;
+
+    padding: 60px 25px 80px;
+
+    flex: 1;
+}
+
+
+/* =========================
+   HEADING
+   ========================= */
+
+.history-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-bottom: 35px;
+}
+
+.section-label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: #e99b32;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.history-heading h1 {
+    margin: 0 0 9px;
+
+    color: #173b4d;
+
+    font-size: 34px;
+    font-weight: 800;
+
+    letter-spacing: -0.8px;
+}
+
+.history-heading p {
+    margin: 0;
+
+    color: #829198;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.home-link {
+    flex-shrink: 0;
+
+    padding: 10px 14px;
+
+    border: 1px solid #e1e9ec;
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #173b4d;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.home-link:hover {
+    background: #f7f9fa;
+    border-color: #d2dfe3;
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   ORDERS LIST
+   ========================= */
+
+.orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+
+/* =========================
+   ORDER CARD
+   ========================= */
+
+.order-card {
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #e3eaec;
+    border-radius: 16px;
+
+    box-shadow:
+        0 5px 20px rgba(23, 59, 77, 0.045);
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.order-card:hover {
+    border-color: #d6e0e3;
+
+    box-shadow:
+        0 10px 30px rgba(23, 59, 77, 0.08);
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   ORDER HEADER
+   ========================= */
+
+.order-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 22px 24px;
+
+    background: #fbfcfc;
+
+    border-bottom: 1px solid #edf1f2;
+}
+
+.order-main-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.order-label {
+    margin-bottom: 2px;
+
+    color: #e99b32;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.order-main-info h2 {
+    margin: 0 0 7px;
+
+    color: #173b4d;
+
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.order-date {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    color: #8b999f;
+
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.order-header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+/* =========================
+   STATUS
+   ========================= */
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 6px 10px;
+
+    border-radius: 20px;
+
+    background: #fff2df;
+    color: #c77b19;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 0.4px;
+}
+
+
+/* =========================
+   TRACK BUTTON
+   ========================= */
+
+.track-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 9px 13px;
+
+    border-radius: 9px;
+
+    background: #fff3df;
+    color: #bd7418;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.track-button:hover {
+    background: #ffe7c4;
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   ORDER INFO
+   ========================= */
+
+.order-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    border-bottom: 1px solid #edf1f2;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 18px 20px;
+
+    border-right: 1px solid #edf1f2;
+}
+
+.info-item:last-child {
+    border-right: none;
+}
+
+.info-icon {
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #f3f6f7;
+
+    font-size: 16px;
+}
+
+.info-item > div {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.info-label {
+    color: #9aa8ad;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+}
+
+.info-item strong {
+    color: #304e5c;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.total-item strong {
+    color: #e99b32;
+
+    font-size: 15px;
+}
+
+
+/* =========================
+   TACOS
+   ========================= */
+
+.tacos-in-order {
+    padding: 20px 24px 23px;
+}
+
+.tacos-title {
+    margin-bottom: 12px;
+
+    color: #173b4d;
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.taco-list {
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid #edf1f2;
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.taco-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    min-height: 51px;
+
+    padding: 8px 13px;
+
+    background: #ffffff;
+}
+
+.taco-row + .taco-row {
+    border-top: 1px solid #edf1f2;
+}
+
+.taco-row-left {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.taco-icon {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background: #fff5e7;
+
+    font-size: 14px;
+}
+
+.taco-name {
+    color: #405965;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.taco-price {
+    color: #173b4d;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* =========================
+   EMPTY STATE
+   ========================= */
+
+.empty-orders {
+    padding: 65px 30px;
+
+    background: #ffffff;
+
+    border: 1px solid #e3eaec;
+    border-radius: 16px;
+
+    text-align: center;
+
+    box-shadow:
+        0 5px 20px rgba(23, 59, 77, 0.04);
+}
+
+.empty-orders-icon {
+    width: 68px;
+    height: 68px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background: #fff3df;
+
+    font-size: 28px;
+}
+
+.empty-orders h2 {
+    margin: 0 0 8px;
+
+    color: #173b4d;
+
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.empty-orders p {
+    max-width: 420px;
+
+    margin: 0 auto 25px;
+
+    color: #8a999f;
+
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.empty-order-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 11px 18px;
+
+    border-radius: 9px;
+
+    background: #e99b32;
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.empty-order-button:hover {
+    background: #d98d27;
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   FOOTER
+   ========================= */
+
+.history-footer {
+    padding: 30px 25px;
+
+    background: #ffffff;
+
+    border-top: 1px solid #edf1f2;
+
+    text-align: center;
+}
+
+.footer-logo img {
+    display: block;
+
+    width: 105px;
+    height: auto;
+
+    margin: 0 auto 12px;
+}
+
+.history-footer p {
+    margin: 0 0 15px;
+
+    color: #9aa8ad;
+
+    font-size: 11px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.footer-links a {
+    color: #71858e;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: #173b4d;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 700px) {
+
+    .history-header {
+        height: auto;
+        min-height: 72px;
+
+        padding: 12px 20px;
+    }
+
+    .history-logo img {
+        width: 110px;
+    }
+
+    .history-profile {
+        width: 40px;
+        height: 40px;
+
+        padding: 0;
+
+        font-size: 0;
+    }
+
+    .history-profile span {
+        font-size: 16px;
+    }
+
+    .history-create {
+        padding: 10px 13px;
+
+        font-size: 12px;
+    }
+
+    .history-container {
+        padding: 40px 15px 60px;
+    }
+
+    .history-heading {
+        flex-direction: column;
+        align-items: flex-start;
+
+        margin-bottom: 25px;
+    }
+
+    .history-heading h1 {
+        font-size: 28px;
+    }
+
+    .order-card-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .order-header-right {
+        width: 100%;
+
+        justify-content: space-between;
+    }
+
+    .order-info {
+        grid-template-columns: 1fr;
+    }
+
+    .info-item {
+        border-right: none;
+        border-bottom: 1px solid #edf1f2;
+    }
+
+    .info-item:last-child {
+        border-bottom: none;
+    }
+
+    .tacos-in-order {
+        padding: 18px 15px 20px;
+    }
+}
+
+
+@media (max-width: 450px) {
+
+    .order-card-header {
+        padding: 18px;
+    }
+
+    .order-header-right {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .track-button {
+        width: 100%;
+    }
+
+    .status-badge {
+        align-self: flex-start;
+    }
+
+    .taco-name {
+        font-size: 11px;
+    }
+
+    .taco-price {
+        font-size: 11px;
+    }
+
+    .history-footer {
+        padding: 25px 15px;
+    }
+}

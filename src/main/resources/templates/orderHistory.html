@@ -1,39 +1,264 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Taco Cloud - Order History</title>
-    <link rel="stylesheet" th:href="@{/styles.css}" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Order History — TacoCloud</title>
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+
+    <link rel="stylesheet" th:href="@{/css/order-history.css}">
 </head>
-<body>
-<h1>Your Order History</h1>
-<a th:href="@{/design}">Design another taco</a> |
-<a th:href="@{/}">Home</a>
-<hr/>
-<div th:fragment="orderList">
-<div th:if="${#lists.isEmpty(orders)}">
-    <p>You haven't placed any orders yet!</p>
+
+<body class="order-history-page">
+
+<div class="order-history-wrapper">
+
+    <!-- Header -->
+    <header class="history-header">
+
+        <a th:href="@{/}" class="history-logo">
+            <img th:src="@{/images/TacoCloud.png}" alt="TacoCloud">
+        </a>
+
+        <div class="history-header-actions">
+
+            <a th:href="@{/profile}" class="history-profile">
+                <span>👤</span>
+                Profile
+            </a>
+
+            <a th:href="@{/design}" class="history-create">
+                Create Taco
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- Main -->
+    <main class="history-container">
+
+        <!-- Page heading -->
+        <div class="history-heading">
+
+            <div>
+                <span class="section-label">YOUR ACCOUNT</span>
+
+                <h1>Your Order History</h1>
+
+                <p>
+                    Take a look at all the delicious tacos you've ordered.
+                </p>
+            </div>
+
+            <a th:href="@{/}" class="home-link">
+                ← Back to Home
+            </a>
+
+        </div>
+
+
+        <!-- Fragment -->
+        <div th:fragment="orderList">
+
+            <!-- Empty state -->
+            <div th:if="${#lists.isEmpty(orders)}"
+                 class="empty-orders">
+
+                <div class="empty-orders-icon">
+                    🌮
+                </div>
+
+                <h2>No orders yet</h2>
+
+                <p>
+                    You haven't placed any orders yet.
+                    Your future taco adventures will appear here.
+                </p>
+
+                <a th:href="@{/design}" class="empty-order-button">
+                    Design Your First Taco →
+                </a>
+
+            </div>
+
+
+            <!-- Orders -->
+            <div th:if="${!#lists.isEmpty(orders)}"
+                 class="orders-list">
+
+                <article th:each="order : ${orders}"
+                         class="order-card">
+
+                    <!-- Order header -->
+                    <div class="order-card-header">
+
+                        <div class="order-main-info">
+
+                            <span class="order-label">
+                                ORDER
+                            </span>
+
+                            <h2 th:text="'#' + ${order.id}">
+                                #1
+                            </h2>
+
+                            <div class="order-date">
+                                <span>🕐</span>
+
+                                <span th:text="${#dates.format(order.placedAt, 'dd MMM yyyy · HH:mm')}">
+                                    16 Sep 2026 · 14:30
+                                </span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="order-header-right">
+
+                            <span class="status-badge"
+                                  th:text="${order.status}">
+                                CREATED
+                            </span>
+
+                            <a th:href="@{/orders/{id}/track(id=${order.id})}"
+                               class="track-button">
+                                🛵 Track order
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Order information -->
+                    <div class="order-info">
+
+                        <div class="info-item">
+
+                            <span class="info-icon">👤</span>
+
+                            <div>
+                                <span class="info-label">
+                                    Delivered to
+                                </span>
+
+                                <strong th:text="${order.deliveryName}">
+                                    Name
+                                </strong>
+                            </div>
+
+                        </div>
+
+
+                        <div class="info-item">
+
+                            <span class="info-icon">🌮</span>
+
+                            <div>
+                                <span class="info-label">
+                                    Tacos
+                                </span>
+
+                                <strong th:text="${#lists.size(order.tacos)} + ' taco(s)'">
+                                    2 tacos
+                                </strong>
+                            </div>
+
+                        </div>
+
+
+                        <div class="info-item total-item">
+
+                            <span class="info-icon">💰</span>
+
+                            <div>
+                                <span class="info-label">
+                                    Total
+                                </span>
+
+                                <strong th:text="${'$' + #numbers.formatDecimal(order.totalPrice, 1, 2)}">
+                                    $0.00
+                                </strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Tacos -->
+                    <div class="tacos-in-order">
+
+                        <div class="tacos-title">
+                            Tacos in this order
+                        </div>
+
+                        <div class="taco-list">
+
+                            <div th:each="taco : ${order.tacos}"
+                                 class="taco-row">
+
+                                <div class="taco-row-left">
+
+                                    <div class="taco-icon">
+                                        🌮
+                                    </div>
+
+                                    <span class="taco-name"
+                                          th:text="${taco.name}">
+                                        Taco Name
+                                    </span>
+
+                                </div>
+
+                                <span class="taco-price"
+                                      th:text="${'$' + #numbers.formatDecimal(taco.price, 1, 2)}">
+                                    $0.00
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="history-footer">
+
+        <div class="footer-logo">
+            <img th:src="@{/images/TacoCloudDark.jpg}"
+                 alt="TacoCloud">
+        </div>
+
+        <p>
+            © 2026 TacoCloud. Made for taco lovers.
+        </p>
+
+        <div class="footer-links">
+            <a th:href="@{/}">Home</a>
+            <a th:href="@{/profile}">Profile</a>
+            <a th:href="@{/design}">Create Taco</a>
+        </div>
+
+    </footer>
+
 </div>
 
-<div th:if="${!#lists.isEmpty(orders)}">
-    <ul>
-        <li th:each="order : ${orders}">
-            <strong th:text="${#dates.format(order.placedAt, 'dd-MMM-yyyy HH:mm')}">Date</strong><br/>
-            <span>Status: <strong th:text="${order.status}" style="color: #d35400;">CREATED</strong></span><br/>
-            <span>Delivered to: <em th:text="${order.deliveryName}">Name</em></span><br/>
-            <span>Total Price: <strong th:text="${'$' + #numbers.formatDecimal(order.totalPrice, 1, 2)}">$0.00</strong></span>
-
-            <p><strong>Tacos in this order:</strong></p>
-            <ul>
-                <li th:each="taco : ${order.tacos}">
-                    <span th:text="${taco.name}">Taco Name</span>
-                    (<span th:text="${'$' + #numbers.formatDecimal(taco.price, 1, 2)}">$0.00</span>)
-                </li>
-            </ul>
-            <hr/>
-        </li>
-    </ul>
-</div>
-</div>
 </body>
 </html>
