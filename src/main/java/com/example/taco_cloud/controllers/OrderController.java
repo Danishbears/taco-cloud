@@ -7,6 +7,7 @@ import com.example.taco_cloud.data.User;
 import com.example.taco_cloud.repositories.NotificationRepository;
 import com.example.taco_cloud.repositories.OrderRepository;
 import com.example.taco_cloud.repositories.UserRepository;
+import com.example.taco_cloud.service.CouponService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Slf4j
 @Controller
@@ -34,12 +36,14 @@ public class OrderController {
     private final OrderMessagingService messagingService;
     private final UserRepository userRepo;
     private final NotificationRepository notificationRepo;
+    private final CouponService couponService;
 
-    public OrderController(OrderRepository orderRepo, UserRepository userRepo, OrderMessagingService orderMessagingService, NotificationRepository notificationRepo) {
+    public OrderController(OrderRepository orderRepo, UserRepository userRepo, OrderMessagingService orderMessagingService, NotificationRepository notificationRepo,CouponService couponService) {
         this.messagingService = orderMessagingService;
         this.orderRepo = orderRepo;
         this.userRepo = userRepo;
         this.notificationRepo = notificationRepo;
+        this.couponService = couponService;
     }
 
 
@@ -128,5 +132,21 @@ public class OrderController {
         } catch (EmptyResultDataAccessException e) {
             log.warn("Attempt to delete non-existing order: {}", orderId);
         }
+    }
+
+    @PostMapping("/apply-coupon")
+    public String applyCoupon(@RequestParam("couponCode") String couponCode,
+                              @ModelAttribute("tacoOrder") TacoOrder order,
+                              RedirectAttributes redirectAttributes) {
+
+        boolean applied = couponService.applyCouponToOrder(couponCode, order);
+
+        if (applied) {
+            redirectAttributes.addFlashAttribute("couponMessage", "Coupon applied successfully!");
+        } else {
+            redirectAttributes.addFlashAttribute("couponError", "Invalid or expired coupon code.");
+        }
+
+        return "redirect:/orders/current";
     }
 }

@@ -1,8 +1,10 @@
 package com.example.taco_cloud;
 
+import com.example.taco_cloud.data.Coupon;
 import com.example.taco_cloud.data.Ingredient;
 import com.example.taco_cloud.data.Taco;
 import com.example.taco_cloud.data.User;
+import com.example.taco_cloud.repositories.CouponRepository;
 import com.example.taco_cloud.repositories.IngredientRepository;
 import com.example.taco_cloud.repositories.TacoRepository;
 import com.example.taco_cloud.repositories.UserRepository;
@@ -12,6 +14,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 @Configuration
@@ -79,6 +83,16 @@ public class DataLoader {
         return args -> {
             repo.save(new User("habuma", encoder.encode("password"), "ROLE_ADMIN"));
             repo.save(new User("tacochef", encoder.encode("password"), "ROLE_ADMIN"));
+        };
+    }
+
+    @Bean
+    public CommandLineRunner initCoupons(CouponRepository couponRepo) {
+        return args -> {
+            if (couponRepo.count() == 0) {
+                couponRepo.save(new Coupon(null, "TACO10", new BigDecimal("10.00"), true, LocalDateTime.now().plusMonths(1)));
+                couponRepo.save(new Coupon(null, "WELCOME20", new BigDecimal("20.00"), true, LocalDateTime.now().plusMonths(6)));
+            }
         };
     }
 }

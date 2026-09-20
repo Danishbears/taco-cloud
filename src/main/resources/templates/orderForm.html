@@ -189,6 +189,112 @@
 </section>
 
 
+<!-- =========================================================
+     COUPON
+========================================================= -->
+
+<section class="coupon-section">
+
+    <div class="coupon-content">
+
+        <div class="coupon-icon">
+            🏷️
+        </div>
+
+        <div class="coupon-text">
+            <span class="section-label">
+                SAVE ON YOUR ORDER
+            </span>
+
+            <h2>Have a promo code?</h2>
+
+            <p>
+                Enter your coupon code to get a discount.
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- Coupon form is intentionally separate from /orders form -->
+    <form th:action="@{/orders/apply-coupon}"
+          method="post"
+          class="coupon-form">
+
+        <div class="coupon-input-wrapper">
+
+            <input type="text"
+                   name="couponCode"
+                   placeholder="Enter coupon code"
+                   autocomplete="off"
+                   required />
+
+        </div>
+
+        <button type="submit"
+                class="coupon-apply-button">
+            Apply
+        </button>
+
+    </form>
+
+
+    <!-- Success -->
+    <div th:if="${couponMessage}"
+         class="coupon-alert coupon-success">
+
+        <span class="coupon-alert-icon">✓</span>
+
+        <span th:text="${couponMessage}">
+            Coupon applied successfully!
+        </span>
+
+    </div>
+
+
+    <!-- Error -->
+    <div th:if="${couponError}"
+         class="coupon-alert coupon-error">
+
+        <span class="coupon-alert-icon">!</span>
+
+        <span th:text="${couponError}">
+            Invalid coupon code.
+        </span>
+
+    </div>
+
+
+    <!-- Applied coupon -->
+    <div th:if="${tacoOrder.appliedCoupon != null}"
+         class="applied-coupon">
+
+        <div class="applied-coupon-left">
+
+            <div class="applied-coupon-icon">
+                ✓
+            </div>
+
+            <div>
+                <span class="applied-label">
+                    COUPON APPLIED
+                </span>
+
+                <strong th:text="${tacoOrder.appliedCoupon.code}">
+                    TACO10
+                </strong>
+            </div>
+
+        </div>
+
+        <div class="discount-value"
+             th:text="${tacoOrder.appliedCoupon.discountPercent + '% OFF'}">
+            10% OFF
+        </div>
+
+    </div>
+
+</section>
 
 <!-- =========================================================
      ORDER FORM

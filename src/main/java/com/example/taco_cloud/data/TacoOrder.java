@@ -16,6 +16,7 @@ import org.hibernate.validator.constraints.CreditCardNumber;
 
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -78,10 +79,26 @@ public class TacoOrder implements Serializable {
         this.tacos.add(taco);
     }
 
-    public double getTotalPrice(){
-        if(tacos == null) return 0.0;
-        return tacos.stream()
-                .mapToDouble(Taco::getPrice)
-                .sum();
+    @ManyToOne
+    @JoinColumn(name = "coupon_id")
+    private Coupon appliedCoupon;
+
+    private BigDecimal discountAmount = BigDecimal.ZERO;
+
+    public BigDecimal getTotalPrice() {
+        BigDecimal rawTotal = tacos.stream()
+                .map(taco -> BigDecimal.valueOf(taco.getPrice()))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        if (appliedCoupon != null && appliedCoupon.isValid()) {
+            BigDecimal discountFactor = appliedCoupon.getDiscountPercent()
+                    .divide(new BigDecimal("100"));
+            this.discountAmount = rawTotal.multiply(discountFactor);
+            return rawTotal.subtract(this.discountAmount);
+        }
+
+        this.discountAmount = BigDecimal.ZERO;
+        return rawTotal;
     }
+
 }
