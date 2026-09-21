@@ -18,6 +18,9 @@ import java.util.UUID;
 @Entity(name="tacos")
 public class Taco {
 
+    @Transient
+    private int quantity= 1;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -42,6 +45,10 @@ public class Taco {
         return ingredients.stream()
                 .mapToDouble(Ingredient::getPrice)
                 .sum();
+    }
+
+    public double getTotalPrice(){
+        return getPrice() * quantity;
     }
 
 }

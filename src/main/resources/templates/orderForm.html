@@ -119,36 +119,54 @@
 
 
         <div class="order-taco-card"
-             th:each="taco, tacoStat : ${tacoOrder.tacos}">
+             th:each="taco, tacoStat : ${tacoOrder.tacos}"
+             style="display: flex; align-items: center; justify-content: space-between; padding: 16px; background: #ffffff; border-radius: 12px; margin-bottom: 12px; border: 1px solid #e2e8f0;">
 
 
-            <div class="order-taco-icon">
-                🌮
-            </div>
-
-
-            <div class="order-taco-info">
-
-                <span>
-                    TACO <span th:text="${tacoStat.index + 1}">1</span>
-                </span>
-
-                <h3 th:text="${taco.name}">
-                    Taco Name
-                </h3>
-
-                <div class="order-taco-price" style="margin-top: 4px; font-weight: 600; color: #2b6cb0;">
-                    <span th:text="${'$' + #numbers.formatDecimal(taco.price, 1, 2)}">$0.00</span>
+            <div class="order-taco-info" style="display: flex; align-items: center; gap: 16px;">
+                <div class="order-taco-icon" style="font-size: 28px;">
+                    🌮
                 </div>
 
+                <div>
+                    <span style="font-size: 12px; color: #a0aec0; text-transform: uppercase; font-weight: 700;"
+                          th:text="'TACO ' + ${tacoStat.index + 1}">TACO 1</span>
+
+                    <h3 style="margin: 0; font-size: 18px; color: #1a202c;" th:text="${taco.name}">
+                        Taco Name
+                    </h3>
+
+                    <div class="order-taco-price" style="margin-top: 4px; font-weight: 600; color: #2b6cb0;">
+                        <span th:text="${'$' + #numbers.formatDecimal(taco.price, 1, 2)}">$0.00</span>
+                    </div>
+                </div>
             </div>
 
 
-            <div class="order-taco-actions">
+            <div class="order-taco-actions" style="display: flex; align-items: center; gap: 16px;">
+
+                <!-- =========================================
+                     QUANTITY SELECTOR
+                ========================================== -->
+                <div class="quantity-selector" style="display: flex; align-items: center; background: #f7fafc; border: 1px solid #cbd5e0; border-radius: 8px; padding: 4px;">
+                    <button type="button" onclick="changeQuantity(this, -1)" style="width: 32px; height: 32px; border: none; background: #edf2f7; border-radius: 6px; cursor: pointer; font-weight: bold; color: #4a5568;">-</button>
+
+                    <input type="number"
+                           th:name="'tacos[' + ${tacoStat.index} + '].quantity'"
+                           th:value="${taco.quantity != 0 ? taco.quantity : 1}"
+                           th:data-price="${taco.price}"
+                           class="taco-quantity-input"
+                           min="1"
+                           max="99"
+                           readonly
+                           style="width: 40px; text-align: center; border: none; background: transparent; font-weight: 600; font-size: 16px; color: #2d3748;" />
+
+                    <button type="button" onclick="changeQuantity(this, 1)" style="width: 32px; height: 32px; border: none; background: #edf2f7; border-radius: 6px; cursor: pointer; font-weight: bold; color: #4a5568;">+</button>
+                </div>
+
 
                 <!-- =========================================
                      EDIT
-                     This is NOT a form.
                 ========================================== -->
 
                 <a th:href="@{/design/edit(index=${tacoStat.index})}"
@@ -161,10 +179,6 @@
 
                 <!-- =========================================
                      DELETE
-                     IMPORTANT:
-
-                     This form is completely separate from
-                     the main /orders form.
                 ========================================== -->
 
                 <form th:action="@{/design/delete}"
@@ -225,25 +239,23 @@
     <!-- Coupon form is intentionally separate from /orders form -->
     <form th:action="@{/orders/apply-coupon}"
           method="post"
-          class="coupon-form">
+          class="coupon-form"
+          onsubmit="attachQuantitiesToCouponForm(this)">
+
+        <div id="coupon-quantities-holder"></div>
 
         <div class="coupon-input-wrapper">
-
             <input type="text"
                    name="couponCode"
                    placeholder="Enter coupon code"
                    autocomplete="off"
                    required />
-
         </div>
 
-        <button type="submit"
-                class="coupon-apply-button">
+        <button type="submit" class="coupon-apply-button">
             Apply
         </button>
-
     </form>
-
 
     <!-- Success -->
     <div th:if="${couponMessage}"
@@ -315,24 +327,24 @@
 
     <div class="summary-details" style="display: flex; flex-direction: column; gap: 12px;">
 
-        <!-- Subtotal (Суммирование цен всех тако через #aggregates.sum) -->
+
         <div style="display: flex; justify-content: space-between; font-size: 16px; color: #4a5568;">
             <span>Subtotal:</span>
-            <strong th:text="${'$' + #numbers.formatDecimal(#aggregates.sum(tacoOrder.tacos.![price]), 1, 2)}">$0.00</strong>
+            <strong id="summary-subtotal" th:text="${'$' + #numbers.formatDecimal(#aggregates.sum(tacoOrder.tacos.![price * quantity]), 1, 2)}">$0.00</strong>
         </div>
 
-        <!-- Discount (если купон применен) -->
+
         <div th:if="${tacoOrder.appliedCoupon != null}" style="display: flex; justify-content: space-between; font-size: 16px; color: #dd6b20;">
             <span>Discount (<span th:text="${tacoOrder.appliedCoupon.code}">TACO10</span>):</span>
-            <strong th:text="${'-$' + #numbers.formatDecimal(tacoOrder.discountAmount, 1, 2)}">-$0.00</strong>
+            <strong id="summary-discount" th:text="${'-$' + #numbers.formatDecimal(tacoOrder.discountAmount, 1, 2)}">-$0.00</strong>
         </div>
 
         <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 8px 0;" />
 
-        <!-- Final Total (Вызов стандартного метода getTotalPrice из TacoOrder.java) -->
+
         <div style="display: flex; justify-content: space-between; font-size: 20px; font-weight: 700; color: #1a202c;">
             <span>Total to Pay:</span>
-            <strong style="color: #2b6cb0;" th:text="${'$' + #numbers.formatDecimal(tacoOrder.totalPrice, 1, 2)}">$0.00</strong>
+            <strong id="summary-total" style="color: #2b6cb0;" th:text="${'$' + #numbers.formatDecimal(tacoOrder.totalPrice, 1, 2)}">$0.00</strong>
         </div>
 
     </div>
@@ -341,11 +353,6 @@
 
 <!-- =========================================================
      ORDER FORM
-
-     IMPORTANT:
-     This form starts AFTER the taco list.
-
-     Delete forms are NOT inside this form.
 ========================================================= -->
 
 <form method="POST"
@@ -616,6 +623,70 @@
 
 <div th:replace="~{fragments/footer :: footer}"></div>
 
+
+<!-- =========================================================
+     DYNAMIC RECALCULATION SCRIPT
+========================================================= -->
+
+<script th:inline="javascript">
+    function changeQuantity(button, delta) {
+        const container = button.closest('.quantity-selector');
+        const input = container.querySelector('.taco-quantity-input');
+
+        let currentVal = parseInt(input.value) || 1;
+        let newVal = currentVal + delta;
+
+        if (newVal >= 1 && newVal <= 99) {
+            input.value = newVal;
+            recalculateOrderSummary();
+        }
+    }
+
+    function recalculateOrderSummary() {
+        let subtotal = 0;
+
+        document.querySelectorAll('.taco-quantity-input').forEach(input => {
+            const price = parseFloat(input.getAttribute('data-price')) || 0;
+            const qty = parseInt(input.value) || 1;
+            subtotal += price * qty;
+        });
+
+        let discountPercent = 0;
+        /*[# th:if="${tacoOrder.appliedCoupon != null}"]*/
+            discountPercent = /*[[${tacoOrder.appliedCoupon.discountPercent}]]*/ 0;
+        /*[/]*/
+
+        const discountAmount = subtotal * (discountPercent / 100);
+        const totalToPay = subtotal - discountAmount;
+
+        const subtotalElem = document.getElementById('summary-subtotal');
+        if (subtotalElem) subtotalElem.textContent = '$' + subtotal.toFixed(2);
+
+        const discountElem = document.getElementById('summary-discount');
+        if (discountElem && discountPercent > 0) {
+            discountElem.textContent = '-$' + discountAmount.toFixed(2);
+        }
+
+        const totalElem = document.getElementById('summary-total');
+        if (totalElem) totalElem.textContent = '$' + totalToPay.toFixed(2);
+    }
+</script>
+
+<script>
+    function attachQuantitiesToCouponForm(form) {
+        const holder = document.getElementById('coupon-quantities-holder');
+        holder.innerHTML = '';
+
+
+        document.querySelectorAll('.taco-quantity-input').forEach((input) => {
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = input.name; // Ex: tacos[0].quantity
+            hiddenInput.value = input.value;
+            holder.appendChild(hiddenInput);
+        });
+    }
+</script>
 
 </body>
 </html>

@@ -88,28 +88,42 @@ public class TacoOrder implements Serializable {
 
 
     public BigDecimal getDiscountAmount() {
-        if (appliedCoupon != null && appliedCoupon.isValid() && tacos != null) {
-            BigDecimal rawTotal = tacos.stream()
-                    .map(taco -> BigDecimal.valueOf(taco.getPrice()))
-                    .reduce(BigDecimal.ZERO, BigDecimal::add);
-
-            BigDecimal discountFactor = appliedCoupon.getDiscountPercent()
-                    .divide(new BigDecimal("100"));
-
-            this.discountAmount = rawTotal.multiply(discountFactor);
-            return this.discountAmount;
+        if (appliedCoupon == null || tacos == null || tacos.isEmpty()) {
+            return BigDecimal.ZERO;
         }
-        this.discountAmount = BigDecimal.ZERO;
-        return this.discountAmount;
+
+        BigDecimal rawTotal = tacos.stream()
+                .map(taco -> BigDecimal.valueOf(taco.getPrice()))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        BigDecimal discountPercent = appliedCoupon.getDiscountPercent();
+        if (discountPercent == null) {
+            return BigDecimal.ZERO;
+        }
+
+        return rawTotal.multiply(discountPercent)
+                .divide(BigDecimal.valueOf(100), 2, java.math.RoundingMode.HALF_UP);
     }
 
     public BigDecimal getTotalPrice() {
-        BigDecimal rawTotal = tacos != null ? tacos.stream()
-                .map(taco -> BigDecimal.valueOf(taco.getPrice()))
-                .reduce(BigDecimal.ZERO, BigDecimal::add) : BigDecimal.ZERO;
+        if (tacos == null || tacos.isEmpty()) {
+            return BigDecimal.ZERO;
+        }
 
-        return rawTotal.subtract(getDiscountAmount());
+        BigDecimal rawTotal = tacos.stream()
+                .map(taco -> {
+                    BigDecimal price = BigDecimal.valueOf(taco.getPrice());
+                    int qty = taco.getQuantity() > 0 ? taco.getQuantity() : 1;
+                    return price.multiply(BigDecimal.valueOf(qty));
+                })
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        BigDecimal discount = getDiscountAmount();
+        if (discount == null) {
+            discount = BigDecimal.ZERO;
+        }
+
+        BigDecimal finalTotal = rawTotal.subtract(discount);
+        return finalTotal.compareTo(BigDecimal.ZERO) < 0 ? BigDecimal.ZERO : finalTotal;
     }
-
-
 }

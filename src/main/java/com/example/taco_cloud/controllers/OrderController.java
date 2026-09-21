@@ -15,6 +15,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable; // ИСПРАВЛЕН ИМПОРТ!
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -85,6 +86,7 @@ public class OrderController {
 
         order.setUser(user);
         order.setStatus(TacoOrder.Status.CREATED);
+
         TacoOrder savedOrder = orderRepo.save(order);
 
         String msg = "Your order #" + savedOrder.getId() + " accepted! Sending it to the kitchen";
@@ -149,4 +151,16 @@ public class OrderController {
 
         return "redirect:/orders/current";
     }
+
+//    @PostMapping("/update-quantity")
+//    @ResponseBody
+//    public ResponseEntity<Void> updateQuantity(@RequestParam("index") int index,
+//                                               @RequestParam("quantity") int quantity,
+//                                               @ModelAttribute("tacoOrder") TacoOrder tacoOrder) {
+//        if (tacoOrder != null && tacoOrder.getTacos() != null && index < tacoOrder.getTacos().size()) {
+//            tacoOrder.getTacos().get(index).setQuantity(quantity);
+//        }
+//        return ResponseEntity.ok().build();
+//    }
+
 }
