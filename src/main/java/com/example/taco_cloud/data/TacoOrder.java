@@ -85,20 +85,31 @@ public class TacoOrder implements Serializable {
 
     private BigDecimal discountAmount = BigDecimal.ZERO;
 
-    public BigDecimal getTotalPrice() {
-        BigDecimal rawTotal = tacos.stream()
-                .map(taco -> BigDecimal.valueOf(taco.getPrice()))
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        if (appliedCoupon != null && appliedCoupon.isValid()) {
+
+    public BigDecimal getDiscountAmount() {
+        if (appliedCoupon != null && appliedCoupon.isValid() && tacos != null) {
+            BigDecimal rawTotal = tacos.stream()
+                    .map(taco -> BigDecimal.valueOf(taco.getPrice()))
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+
             BigDecimal discountFactor = appliedCoupon.getDiscountPercent()
                     .divide(new BigDecimal("100"));
-            this.discountAmount = rawTotal.multiply(discountFactor);
-            return rawTotal.subtract(this.discountAmount);
-        }
 
+            this.discountAmount = rawTotal.multiply(discountFactor);
+            return this.discountAmount;
+        }
         this.discountAmount = BigDecimal.ZERO;
-        return rawTotal;
+        return this.discountAmount;
     }
+
+    public BigDecimal getTotalPrice() {
+        BigDecimal rawTotal = tacos != null ? tacos.stream()
+                .map(taco -> BigDecimal.valueOf(taco.getPrice()))
+                .reduce(BigDecimal.ZERO, BigDecimal::add) : BigDecimal.ZERO;
+
+        return rawTotal.subtract(getDiscountAmount());
+    }
+
 
 }
