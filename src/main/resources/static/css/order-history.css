@@ -11,8 +11,8 @@ body {
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background: #f5f7f8;
-    color: #173b4d;
+    background: var(--page-bg);
+    color: var(--text-primary);
 }
 
 .order-history-page {
@@ -39,8 +39,8 @@ body {
 
     padding: 0 40px;
 
-    background: #ffffff;
-    border-bottom: 1px solid #edf1f2;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .history-logo {
@@ -91,31 +91,31 @@ body {
 
     padding: 10px 14px;
 
-    background: #ffffff;
-    border: 1px solid #e1e9ec;
+    background: var(--surface);
+    border: 1px solid var(--border);
 
-    color: #173b4d;
+    color: var(--text-primary);
 }
 
 .history-profile:hover {
-    background: #f7f9fa;
-    border-color: #d2dfe3;
+    background: var(--surface-hover);
+    border-color: var(--border-strong);
     transform: translateY(-1px);
 }
 
 .history-create {
     padding: 11px 18px;
 
-    background: #e99b32;
-    color: #ffffff;
+    background: var(--accent);
+    color: var(--text-on-dark);
 }
 
 .history-create:hover {
-    background: #d98d27;
+    background: var(--accent-hover);
     transform: translateY(-1px);
 
     box-shadow:
-        0 8px 20px rgba(233, 155, 50, 0.22);
+        0 8px 20px var(--accent-shadow);
 }
 
 
@@ -154,7 +154,7 @@ body {
 
     margin-bottom: 9px;
 
-    color: #e99b32;
+    color: var(--accent);
 
     font-size: 11px;
     font-weight: 800;
@@ -165,7 +165,7 @@ body {
 .history-heading h1 {
     margin: 0 0 9px;
 
-    color: #173b4d;
+    color: var(--text-primary);
 
     font-size: 34px;
     font-weight: 800;
@@ -176,7 +176,7 @@ body {
 .history-heading p {
     margin: 0;
 
-    color: #829198;
+    color: var(--text-muted);
 
     font-size: 13px;
     line-height: 1.6;
@@ -187,12 +187,12 @@ body {
 
     padding: 10px 14px;
 
-    border: 1px solid #e1e9ec;
+    border: 1px solid var(--border);
     border-radius: 9px;
 
-    background: #ffffff;
+    background: var(--surface);
 
-    color: #173b4d;
+    color: var(--text-primary);
 
     font-size: 12px;
     font-weight: 700;
@@ -206,8 +206,8 @@ body {
 }
 
 .home-link:hover {
-    background: #f7f9fa;
-    border-color: #d2dfe3;
+    background: var(--surface-hover);
+    border-color: var(--border-strong);
     transform: translateY(-1px);
 }
 
@@ -230,13 +230,13 @@ body {
 .order-card {
     overflow: hidden;
 
-    background: #ffffff;
+    background: var(--surface);
 
-    border: 1px solid #e3eaec;
+    border: 1px solid var(--border);
     border-radius: 16px;
 
     box-shadow:
-        0 5px 20px rgba(23, 59, 77, 0.045);
+        0 5px 20px var(--shadow-color);
 
     transition:
         border-color 0.2s ease,
@@ -245,10 +245,10 @@ body {
 }
 
 .order-card:hover {
-    border-color: #d6e0e3;
+    border-color: var(--border-strong);
 
     box-shadow:
-        0 10px 30px rgba(23, 59, 77, 0.08);
+        0 10px 30px var(--shadow-color);
 
     transform: translateY(-2px);
 }
@@ -267,9 +267,9 @@ body {
 
     padding: 22px 24px;
 
-    background: #fbfcfc;
+    background: var(--surface-secondary);
 
-    border-bottom: 1px solid #edf1f2;
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .order-main-info {
@@ -280,7 +280,7 @@ body {
 .order-label {
     margin-bottom: 2px;
 
-    color: #e99b32;
+    color: var(--accent);
 
     font-size: 9px;
     font-weight: 800;
@@ -291,7 +291,7 @@ body {
 .order-main-info h2 {
     margin: 0 0 7px;
 
-    color: #173b4d;
+    color: var(--text-primary);
 
     font-size: 24px;
     font-weight: 800;
@@ -302,7 +302,7 @@ body {
     align-items: center;
     gap: 6px;
 
-    color: #8b999f;
+    color: var(--text-muted);
 
     font-size: 11px;
     font-weight: 500;
@@ -327,8 +327,8 @@ body {
 
     border-radius: 20px;
 
-    background: #fff2df;
-    color: #c77b19;
+    background: var(--accent-soft);
+    color: var(--accent-text);
 
     font-size: 10px;
     font-weight: 800;
@@ -350,8 +350,8 @@ body {
 
     border-radius: 9px;
 
-    background: #fff3df;
-    color: #bd7418;
+    background: var(--accent-soft);
+    color: var(--accent-text);
 
     font-size: 11px;
     font-weight: 700;
@@ -364,7 +364,7 @@ body {
 }
 
 .track-button:hover {
-    background: #ffe7c4;
+    background: var(--accent-soft-hover);
     transform: translateY(-1px);
 }
 
@@ -377,7 +377,7 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 
-    border-bottom: 1px solid #edf1f2;
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .info-item {
@@ -388,7 +388,7 @@ body {
 
     padding: 18px 20px;
 
-    border-right: 1px solid #edf1f2;
+    border-right: 1px solid var(--border-subtle);
 }
 
 .info-item:last-child {
@@ -407,7 +407,7 @@ body {
 
     border-radius: 10px;
 
-    background: #f3f6f7;
+    background: var(--surface-hover);
 
     font-size: 16px;
 }
@@ -421,7 +421,7 @@ body {
 }
 
 .info-label {
-    color: #9aa8ad;
+    color: var(--text-muted);
 
     font-size: 9px;
     font-weight: 700;
@@ -431,7 +431,7 @@ body {
 }
 
 .info-item strong {
-    color: #304e5c;
+    color: var(--text-secondary);
 
     font-size: 12px;
     font-weight: 700;
@@ -441,7 +441,7 @@ body {
 }
 
 .total-item strong {
-    color: #e99b32;
+    color: var(--accent);
 
     font-size: 15px;
 }
@@ -458,7 +458,7 @@ body {
 .tacos-title {
     margin-bottom: 12px;
 
-    color: #173b4d;
+    color: var(--text-primary);
 
     font-size: 12px;
     font-weight: 800;
@@ -468,7 +468,7 @@ body {
     display: flex;
     flex-direction: column;
 
-    border: 1px solid #edf1f2;
+    border: 1px solid var(--border-subtle);
     border-radius: 10px;
 
     overflow: hidden;
@@ -483,11 +483,11 @@ body {
 
     padding: 8px 13px;
 
-    background: #ffffff;
+    background: var(--surface);
 }
 
 .taco-row + .taco-row {
-    border-top: 1px solid #edf1f2;
+    border-top: 1px solid var(--border-subtle);
 }
 
 .taco-row-left {
@@ -507,20 +507,20 @@ body {
 
     border-radius: 8px;
 
-    background: #fff5e7;
+    background: var(--accent-soft);
 
     font-size: 14px;
 }
 
 .taco-name {
-    color: #405965;
+    color: var(--text-secondary);
 
     font-size: 12px;
     font-weight: 600;
 }
 
 .taco-price {
-    color: #173b4d;
+    color: var(--text-primary);
 
     font-size: 12px;
     font-weight: 700;
@@ -534,15 +534,15 @@ body {
 .empty-orders {
     padding: 65px 30px;
 
-    background: #ffffff;
+    background: var(--surface);
 
-    border: 1px solid #e3eaec;
+    border: 1px solid var(--border);
     border-radius: 16px;
 
     text-align: center;
 
     box-shadow:
-        0 5px 20px rgba(23, 59, 77, 0.04);
+        0 5px 20px var(--shadow-color);
 }
 
 .empty-orders-icon {
@@ -557,7 +557,7 @@ body {
 
     border-radius: 18px;
 
-    background: #fff3df;
+    background: var(--accent-soft);
 
     font-size: 28px;
 }
@@ -565,7 +565,7 @@ body {
 .empty-orders h2 {
     margin: 0 0 8px;
 
-    color: #173b4d;
+    color: var(--text-primary);
 
     font-size: 21px;
     font-weight: 800;
@@ -576,7 +576,7 @@ body {
 
     margin: 0 auto 25px;
 
-    color: #8a999f;
+    color: var(--text-muted);
 
     font-size: 12px;
     line-height: 1.7;
@@ -591,8 +591,8 @@ body {
 
     border-radius: 9px;
 
-    background: #e99b32;
-    color: #ffffff;
+    background: var(--accent);
+    color: var(--text-on-dark);
 
     font-size: 12px;
     font-weight: 700;
@@ -605,7 +605,7 @@ body {
 }
 
 .empty-order-button:hover {
-    background: #d98d27;
+    background: var(--accent-hover);
     transform: translateY(-1px);
 }
 
@@ -617,9 +617,9 @@ body {
 .history-footer {
     padding: 30px 25px;
 
-    background: #ffffff;
+    background: var(--surface);
 
-    border-top: 1px solid #edf1f2;
+    border-top: 1px solid var(--border-subtle);
 
     text-align: center;
 }
@@ -636,7 +636,7 @@ body {
 .history-footer p {
     margin: 0 0 15px;
 
-    color: #9aa8ad;
+    color: var(--text-muted);
 
     font-size: 11px;
 }
@@ -648,7 +648,7 @@ body {
 }
 
 .footer-links a {
-    color: #71858e;
+    color: var(--text-secondary);
 
     font-size: 11px;
     font-weight: 600;
@@ -657,7 +657,7 @@ body {
 }
 
 .footer-links a:hover {
-    color: #173b4d;
+    color: var(--text-primary);
 }
 
 
@@ -729,7 +729,7 @@ body {
 
     .info-item {
         border-right: none;
-        border-bottom: 1px solid #edf1f2;
+        border-bottom: 1px solid var(--border-subtle);
     }
 
     .info-item:last-child {

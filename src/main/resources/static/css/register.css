@@ -11,8 +11,8 @@ body {
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background: #f5f7f8;
-    color: #173b4d;
+    background: var(--page-bg);
+    color: var(--text-primary);
 }
 
 .register-page {
@@ -33,11 +33,11 @@ body {
    ========================= */
 
 .register-card {
-    background: #ffffff;
-    border: 1px solid #edf1f2;
+    background: var(--surface);
+    border: 1px solid var(--border-subtle);
     border-radius: 20px;
     padding: 42px 42px 36px;
-    box-shadow: 0 15px 45px rgba(23, 59, 77, 0.08);
+    box-shadow: 0 15px 45px var(--shadow-color);
 }
 
 /* =========================
@@ -67,7 +67,7 @@ body {
 
 .register-header h1 {
     margin: 0 0 10px;
-    color: #173b4d;
+    color: var(--text-primary);
     font-size: 27px;
     font-weight: 800;
     letter-spacing: -0.5px;
@@ -75,7 +75,7 @@ body {
 
 .register-header p {
     margin: 0;
-    color: #7a8c94;
+    color: var(--text-muted);
     font-size: 13px;
     line-height: 1.6;
 }
@@ -97,13 +97,13 @@ body {
 }
 
 .form-group label {
-    color: #173b4d;
+    color: var(--text-primary);
     font-size: 13px;
     font-weight: 700;
 }
 
 .optional {
-    color: #9aa8ad;
+    color: var(--text-muted);
     font-size: 11px;
     font-weight: 500;
     margin-left: 4px;
@@ -114,11 +114,11 @@ body {
     height: 48px;
     padding: 0 15px;
 
-    border: 1px solid #dfe7ea;
+    border: 1px solid var(--border);
     border-radius: 10px;
 
-    background: #fbfcfc;
-    color: #173b4d;
+    background: var(--surface-secondary);
+    color: var(--text-primary);
 
     font-family: 'Montserrat', sans-serif;
     font-size: 13px;
@@ -132,17 +132,17 @@ body {
 }
 
 .form-group input::placeholder {
-    color: #a7b2b7;
+    color: var(--text-muted);
 }
 
 .form-group input:hover {
-    border-color: #cfdcdf;
+    border-color: var(--border-strong);
 }
 
 .form-group input:focus {
-    background: #ffffff;
-    border-color: #e99b32;
-    box-shadow: 0 0 0 3px rgba(233, 155, 50, 0.12);
+    background: var(--surface);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-shadow);
 }
 
 /* =========================
@@ -163,8 +163,8 @@ body {
     border: none;
     border-radius: 10px;
 
-    background: #e99b32;
-    color: #ffffff;
+    background: var(--accent);
+    color: var(--text-on-dark);
 
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
@@ -185,9 +185,9 @@ body {
 }
 
 .register-button:hover {
-    background: #d98d27;
+    background: var(--accent-hover);
     transform: translateY(-1px);
-    box-shadow: 0 8px 20px rgba(233, 155, 50, 0.22);
+    box-shadow: 0 8px 20px var(--accent-shadow);
 }
 
 .register-button:hover span {
@@ -212,21 +212,21 @@ body {
     margin-top: 26px;
     padding-top: 23px;
 
-    border-top: 1px solid #edf1f2;
+    border-top: 1px solid var(--border-subtle);
 
-    color: #8a999f;
+    color: var(--text-muted);
     font-size: 12px;
 }
 
 .login-prompt a {
-    color: #e99b32;
+    color: var(--accent);
     font-weight: 700;
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 .login-prompt a:hover {
-    color: #d98d27;
+    color: var(--accent-hover);
 }
 
 /* =========================
@@ -238,7 +238,7 @@ body {
 
     margin-top: 20px;
 
-    color: #819198;
+    color: var(--text-muted);
     text-align: center;
 
     font-size: 12px;
@@ -250,7 +250,7 @@ body {
 }
 
 .back-home:hover {
-    color: #173b4d;
+    color: var(--text-primary);
 }
 
 /* =========================
